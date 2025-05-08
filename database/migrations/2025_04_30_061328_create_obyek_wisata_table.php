@@ -17,13 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('nama_wisata', 255);
             $table->text('deskripsi_wisata');
-            $table->foreignId('id_kategori_wisata')->constrained('kategori_wisata')->onDelete('cascade');
+            $table->foreignId('id_kategori_wisata')->constrained('kategori_wisata')->onDelete('cascade')->onUpdate('cascade');
             $table->text('fasilitas');
             $table->text('foto1');
-            $table->text('foto2');
-            $table->text('foto3');
-            $table->text('foto4');
-            $table->text('foto5');
+            $table->text('foto2')->nullable();
+            $table->text('foto3')->nullable();
+            $table->text('foto4')->nullable();
+            $table->text('foto5')->nullable();
             $table->timestamps();
         });
     }

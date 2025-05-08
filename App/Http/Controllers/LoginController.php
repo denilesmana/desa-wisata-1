@@ -17,16 +17,21 @@ class LoginController extends Controller
         ]);
     }
 
-    public function authenticate(Request $request)
+    function login(Request $request)
     {
-        $credentials = $request->validate([
+        $user = $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+        if(Auth::attempt($user)) {
+            if(Auth::user()->level == 'pemilik'){
+                return redirect('/admin/pemilik');
+            } elseif (Auth::user()->level == 'bendahara'){
+                return redirect('/admin/bendahara');
+            } elseif (Auth::user()->level == 'pelanggan'){
+                return redirect('/pelanggan');
+            }
         }
 
         return back()->with('loginError', 'Login failed!');

@@ -16,6 +16,27 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function bendahara()
+    {
+        return view('be.dashboard', [
+            'title' => 'Bendahara'
+        ]);
+    }
+
+    public function pemilik()
+    {
+        return view('be.dashboard', [
+            'title' => 'Pemilik'
+        ]);
+    }
+
+    public function pelanggan()
+    {
+        return view('fe.home', [
+            'title' => 'Home'
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

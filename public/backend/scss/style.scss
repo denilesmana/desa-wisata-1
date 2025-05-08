@@ -1,51 +1,121 @@
-// (Required file)
-@import 'bootstrap/functions';
-//@import 'bootstrap/variables';
-@import 'config/default/variables';
-@import 'config/default/custom-variables';
+/*------------------------------------------------------------------
+ [Master Stylesheet]
+
+  Project:	RoyalUI Admin
+  Version:	1.0.0
+-------------------------------------------------------------------*/
 
 
-// Import Bootstrap source files (Required file)
-@import 'bootstrap/bootstrap';
 
-// Structure
-@import 'custom/structure/layout';
-@import 'custom/structure/preloader';
-@import 'custom/structure/navbar';
-@import 'custom/structure/sidebar';
+/*-------------------------------------------------------------------
+  ===== Table of Contents =====
 
-// Theme Colors
-@import 'custom/theme-colors/theme-colors';
+  * Bootstrap functions
+  * Bootstrap variables
+  * Template variables
+  * SCSS Compass Functions
+  * Boostrap Main SCSS
+  * Template mixins
+    + Animation Mixins
+    + Button Mixins
+    + Miscellaneous Mixins
+    + Cards Mixins
+    + Color Functions Mixins
+    + Badge Mixins
+    + Blockquote Mixins
+    
+  * Core Styles
+    + Reset Styles
+    + Fonts
+    + Functions
+    + Backgrounds
+    + Typography
+    + Miscellaneous
+    + Footer
+    + Utilities
+    + Demo styles
+  * Components
+    + Buttons
+    + Badges
+    + Bootstrap Progress
+    + Cards
+    + Checkboxes and Radios
+    + Dropdowns
+    + Forms
+    + Icons
+    + Lists
+    + Tables
+    + To-do List
+  * Landing screens
+    + Auth
+  * Layout
+    + Vertical wrapper
+    + Sidebar
+    + Navbar
+    + Layouts
 
-// Components
-@import 'custom/components/tables';
-@import 'custom/components/breadcrumb';
-@import 'custom/components/buttons';
-@import 'custom/components/reboot';
-@import 'custom/components/card';
-@import 'custom/components/forms';
-@import 'custom/components/dropdown';
-@import 'custom/components/progress';
-@import 'custom/components/modal';
-@import 'custom/components/tabs';
+-------------------------------------------------------------------*/
 
-// Pages
-@import 'custom/pages/dashboard';
-@import 'custom/pages/chat-app';
-@import 'custom/pages/grid';
-@import 'custom/pages/authentication';
-@import 'custom/pages/landingpage';
 
-// Plugins
-@import 'custom/plugins/perfect-scrollbar';
-@import 'custom/plugins/chartist-charts';
-@import 'custom/plugins/calendar';
+/*-------------------------------------------------------------------*/
+/* === Import Bootstrap functions and variables === */
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
 
-// Icons
-@import 'icons/icons';
+/*-------------------------------------------------------------------*/
+/* === Import template variables === */
+@import "variables";
 
-// Fonts
-@import 'fonts/landingpage_fonts';
+/*-------------------------------------------------------------------*/
+/* === SCSS Compass Functions === */
+@import "../node_modules/compass-mixins/lib/compass";
+@import "../node_modules/compass-mixins/lib/animate";
 
-  
-  
+/*-------------------------------------------------------------------*/
+/* === Boostrap Main SCSS === */
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+/*-------------------------------------------------------------------*/
+/* === Template mixins === */
+@import "mixins/misc";
+@import "mixins/badges";
+@import "mixins/animation";
+@import "mixins/blockqoute";
+@import "mixins/buttons";
+@import "mixins/cards";
+
+/*-------------------------------------------------------------------*/
+/* === Core Styles === */
+@import "reset";
+@import "fonts";
+@import "functions";
+@import "background";
+@import "typography";
+@import "misc";
+@import "footer";
+@import "utilities";
+@import "demo";
+
+/*-------------------------------------------------------------------*/
+/* === Components === */
+@import "components/buttons";
+@import "components/badges";
+@import "components/bootstrap-progress";
+@import "components/cards";
+@import "components/checkbox-radio";
+@import "components/dropdown";
+@import "components/forms";
+@import "components/icons";
+@import "components/lists";
+@import "components/tables";
+@import "components/todo-list";
+
+/*-------------------------------------------------------------------*/
+/* === Landing screens === */
+@import "landing-screens/auth";
+
+
+@import "vertical-wrapper";
+@import "sidebar";
+@import "navbar";
+@import "layouts";

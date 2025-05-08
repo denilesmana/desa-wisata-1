@@ -21,7 +21,7 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-6 mb-5 mb-md-0">
-            <img src="/frontend/images/hero_bg_2.jpg" alt="Image" class="img-fluid rounded">
+            <img src="{{ asset('frontend/images/hero_bg_2.jpg') }}" alt="Image" class="img-fluid rounded">
           </div>
           <div class="col-md-6 pl-md-5">
             <h2 class="font-weight-light text-black mb-4">About Company</h2>
@@ -38,47 +38,6 @@
       </div>
     </div>
 
-    <div class="site-section">
-      <div class="container">
-         <div class="row justify-content-center mb-5" data-aos="fade-up">
-          <div class="col-md-7">
-            <h2 class="font-weight-light text-black text-center">Our Team</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4 text-center mb-5" data-aos="fade-up">
-            <img src="images/person_1.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-4">
-            <h2 class="text-black font-weight-light mb-4">Jean McMiller</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur ab quas facilis obcaecati non ea, est odit repellat distinctio incidunt, quia aliquam eveniet quod deleniti impedit sapiente atque tenetur porro?</p>
-            <p>
-              <a href="#" class="pl-0 pr-3"><span class="icon-twitter"></span></a>
-              <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="pl-3 pr-3"><span class="icon-facebook"></span></a>
-            </p>
-          </div>
-          <div class="col-md-6 col-lg-4 text-center mb-5" data-aos="fade-up">
-            <img src="images/person_2.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-4">
-            <h2 class="text-black font-weight-light mb-4">Claire Peters</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur ab quas facilis obcaecati non ea, est odit repellat distinctio incidunt, quia aliquam eveniet quod deleniti impedit sapiente atque tenetur porro?</p>
-            <p>
-              <a href="#" class="pl-0 pr-3"><span class="icon-twitter"></span></a>
-              <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="pl-3 pr-3"><span class="icon-facebook"></span></a>
-            </p>
-          </div>
-          <div class="col-md-6 col-lg-4 text-center mb-5" data-aos="fade-up">
-            <img src="images/person_4.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-4">
-            <h2 class="text-black font-weight-light mb-4">John Sawyer</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur ab quas facilis obcaecati non ea, est odit repellat distinctio incidunt, quia aliquam eveniet quod deleniti impedit sapiente atque tenetur porro?</p>
-            <p>
-              <a href="#" class="pl-0 pr-3"><span class="icon-twitter"></span></a>
-              <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="pl-3 pr-3"><span class="icon-facebook"></span></a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="site-section block-13 bg-light">
   
@@ -96,7 +55,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6 mb-5">
-                  <img src="/frontend/images/img_1.jpg" alt="Image" class="img-md-fluid">
+                  <img src="{{ asset('frontend/images/img_1.jpg') }}" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
                   <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
@@ -110,7 +69,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6 mb-5">
-                  <img src="/frontend/images/img_2.jpg" alt="Image" class="img-md-fluid">
+                  <img src="{{ asset('frontend/images/img_2.jpg') }}" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
                   <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
@@ -124,7 +83,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-6 mb-5">
-                  <img src="/frontend/images/img_4.jpg" alt="Image" class="img-md-fluid">
+                  <img src="{{ asset('frontend/images/img_4.jpg') }}" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
                   <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
@@ -150,19 +109,19 @@
     </div>
   </div>
 
-  <script src="/frontend/js/jquery-3.3.1.min.js"></script>
-  <script src="/frontend/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/frontend/js/jquery-ui.js"></script>
-  <script src="/frontend/js/popper.min.js"></script>
-  <script src="/frontend/js/bootstrap.min.js"></script>
-  <script src="/frontend/js/owl.carousel.min.js"></script>
-  <script src="/frontend/js/jquery.stellar.min.js"></script>
-  <script src="/frontend/js/jquery.countdown.min.js"></script>
-  <script src="/frontend/js/jquery.magnific-popup.min.js"></script>
-  <script src="/frontend/js/bootstrap-datepicker.min.js"></script>
-  <script src="/frontend/js/aos.js"></script>
+  <script src="{{ asset('frontend/js/jquery-3.3.1.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/jquery-migrate-3.0.1.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/jquery-ui.js') }}"></script>
+  <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/jquery.stellar.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/jquery.countdown.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/bootstrap-datepicker.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/aos.js') }}"></script>
 
-  <script src="/frontend/js/main.js"></script>
+  <script src="{{ asset('frontend/js/main.js') }}"></script>
     
   </body>
 </html>

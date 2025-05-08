@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Users;
+
 
 class UsersController extends Controller
 {
@@ -11,8 +14,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('be.users', [
-            'title' => 'Users'
+        $users = User::all();
+        return view('Users.index', compact('users'), [
+            'title' => 'User'
         ]);
     }
 
@@ -21,7 +25,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('Users.create', [
+            'title' => 'Create'
+        ]);
     }
 
     /**
@@ -29,7 +35,18 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $validated = $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:8',
+        'level' => 'required'
+    ]);
+
+    $validated['password'] = bcrypt($validated['password']);
+
+    User::create($validated);
+    
+    return redirect('users')->with('success', 'User berhasil dibuat!');
     }
 
     /**
@@ -43,24 +60,31 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit(User $user)
+{
+    return view('Users.edit', [
+        'title' => 'Edit User',
+        'user' => $user
+    ]);
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+    $validated = $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,'.$user->id,
+        'level' => 'required',
+    ]);
+
+    $user->update($validated);
+    return redirect()->route('users.index')->with('success', 'Data user diperbarui!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(User $user) {
+    $user->delete();
+    return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }
 }

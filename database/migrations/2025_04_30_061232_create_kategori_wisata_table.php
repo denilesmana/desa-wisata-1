@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kategori_wisata', function (Blueprint $table) {
             $table->id();
-            $table->string('kategori_wisata', 255);
+            $table->enum('kategori_wisata', ['wisata_alam', 'wisata_budaya', 'wisata_kuliner']);
             $table->timestamps();
         });
     }

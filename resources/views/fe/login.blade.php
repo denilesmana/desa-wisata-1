@@ -47,7 +47,7 @@
                     <div class="form-group mb-4">
                       <label for="email">Email</label>
                       <input type="email" name="email" class="form-control @error('email')is-invalid
-                       @enderror" id="email" placeholder="Enter email" autofocus required value="{{ old ('email') }}">
+                       @enderror" id="email" placeholder="Enter email" autofocus required value="">
                        @error('email')
                       <div class="invalid-feedback">
                         {{ $message }}

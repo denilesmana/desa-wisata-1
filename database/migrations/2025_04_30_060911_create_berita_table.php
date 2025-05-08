@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('berita');
             $table->dateTime('tgl_post');
             $table->unsignedBigInteger('id_kategori_berita');
-            $table->foreign('id_kategori_berita')->references('id')->on('kategori_berita')->onDelete('cascade');
+            $table->foreign('id_kategori_berita')->references('id')->on('kategori_berita')->onDelete('cascade')->onUpdate('cascade');
             $table->text('foto');
             $table->timestamps();
         });
