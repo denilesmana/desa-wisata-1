@@ -20,8 +20,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'level'
+        'level',
+        'aktif',
+        'remember_token',
     ];
+    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,6 +48,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function karyawan()
+    {
+        return $this->hasOne(Karyawan::class, 'id_users');
+    }
+
+    public function pelanggan()
+    {
+        return $this->hasOne(Pelanggan::class, 'id_users');
+    }
+
+    
+
 }
 
 

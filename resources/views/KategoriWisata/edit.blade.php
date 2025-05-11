@@ -17,14 +17,12 @@
                 <form action="{{ route('kategori_wisata.update', $kategori_wisata->id) }}" method="POST">
                 @csrf            
                 @method('PUT')
-                <div class="form-group">
+               <div class="form-group">
                     <label for="kategori_wisata">Kategori Wisata</label>
-                    <select class="form-control" name="kategori_wisata" id="kategori_wisata" required>
-                    <option value="">-- Pilih Kategori --</option>
-                    <option value="wisata_alam" {{ $kategori_wisata->kategori_wisata == 'wisata_alam' ? 'selected' : '' }}>Wisata Alam</option>
-                    <option value="wisata_budaya" {{ $kategori_wisata->kategori_wisata == 'wisata_budaya' ? 'selected' : '' }}>Wisata Budaya</option>
-                    <option value="wisata_kuliner" {{ $kategori_wisata->kategori_wisata == 'wisata_kuliner' ? 'selected' : '' }}>Wisata Kuliner</option>
-                    </select>
+                    <input type="text" name="kategori_wisata" class="form-control" id="kategori_wisata" value="{{ old('kategori_wisata', $kategori_wisata->kategori_wisata) }}" placeholder="Kategori Berita" required>
+                    @error('kategori_wisata')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Update</button>
                 <button type="button" class="btn btn-light" onclick="window.history.back()">Cancel</button>

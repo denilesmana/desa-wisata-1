@@ -29,8 +29,8 @@ class LoginController extends Controller
                 return redirect('/admin/pemilik');
             } elseif (Auth::user()->level == 'bendahara'){
                 return redirect('/admin/bendahara');
-            } elseif (Auth::user()->level == 'pelanggan'){
-                return redirect('/pelanggan');
+            } elseif (Auth::user()->level == 'karyawan'){
+                return redirect('/karyawan');
             }
         }
 

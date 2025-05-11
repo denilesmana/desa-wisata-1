@@ -45,7 +45,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                <button class="btn btn-light">Cancel</button>
+                <button type="button" class="btn btn-light" onclick="window.history.back()">Cancel</button>
               </form>
             </div>
           </div>

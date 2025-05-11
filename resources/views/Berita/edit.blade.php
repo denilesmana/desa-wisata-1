@@ -44,16 +44,17 @@
                 <div class="form-group">
                   <label for="id_kategori_berita">Kategori Berita</label>
                   <select name="id_kategori_berita" class="form-control" required>
-                    @foreach($kategori_berita as $kategori)
-                      <option value="{{ $kategori->id }}" {{ (old('id_kategori_berita', $berita->id_kategori_berita) == $kategori->id) ? 'selected' : '' }}>
-                        {{ $kategori->kategori_berita }}
-                      </option>
-                    @endforeach
+                      @foreach($kategori_berita as $kategori)
+                          <option value="{{ $kategori->id }}" 
+                              {{ (old('id_kategori_berita', $berita->id_kategori_berita ?? '') == $kategori->id) ? 'selected' : '' }}>
+                              {{ ucwords(str_replace('_', ' ', $kategori->kategori_berita)) }}
+                          </option>
+                      @endforeach
                   </select>
                   @error('id_kategori_berita')
-                    <span class="text-danger">{{ $message }}</span>
+                      <span class="text-danger">{{ $message }}</span>
                   @enderror
-                </div>
+              </div>
               
                 <div class="form-group">
                   <label>Upload Image</label>

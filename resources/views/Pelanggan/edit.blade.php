@@ -10,46 +10,52 @@
         <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Edit Karyawan</h4>
-                        <form action="{{ route('karyawan.update', $user->id) }}" method="POST">
+                <h4 class="card-title">Edit pelanggan</h4>
+                        <form action="{{ route('pelanggan.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                        
+
                             <div class="form-group">
-                                <label>Nama Karyawan</label>
-                                <input type="text" name="nama_karyawan" class="form-control"
-                                    value="{{ old('nama_karyawan', $user->karyawan->nama_karyawan ?? $user->name) }}">
+                                <label>Nama pelanggan</label>
+                                <input type="text" name="nama_lengkap" class="form-control"
+                                    value="{{ old('nama_lengkap', $user->pelanggan->nama_lengkap ?? $user->name) }}" required>
                             </div>
-                        
+
                             <div class="form-group">
-                                <label>Alamat</label>
-                                <textarea name="alamat" class="form-control">{{ old('alamat', $user->karyawan->alamat ?? '') }}</textarea>
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-control"
+                                    value="{{ old('email', $user->email) }}" required>
                             </div>
-                        
+
+                            <div class="form-group">
+                                <label>Password (Kosongkan jika tidak ingin mengubah)</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+
                             <div class="form-group">
                                 <label>No Telepon</label>
                                 <input type="text" name="no_hp" class="form-control"
-                                    value="{{ old('no_hp', $user->karyawan->no_hp ?? '') }}">
+                                    value="{{ old('no_hp', $user->pelanggan->no_hp ?? '') }}" required>
                             </div>
-                        
+
                             <div class="form-group">
-                                <label>Jabatan</label>
-                                <select name="jabatan" class="form-control">
-                                    <option value="administrasi" {{ ($user->karyawan->jabatan ?? '') == 'administrasi' ? 'selected' : '' }}>
-                                        Administrasi
-                                    </option>
-                                    <option value="bendahara" {{ ($user->karyawan->jabatan ?? '') == 'bendahara' ? 'selected' : '' }}>
-                                        Bendahara
-                                    </option>
-                                    <option value="pemilik" {{ ($user->karyawan->jabatan ?? '') == 'pemilik' ? 'selected' : '' }}>
-                                        Pemilik
-                                    </option>
-                                </select>
+                                <label>Alamat</label>
+                                <textarea name="alamat" class="form-control" required>{{ old('alamat', $user->pelanggan->alamat ?? '') }}</textarea>
                             </div>
-                        
+
+                            <div class="form-group">
+                                <label>Foto</label>
+                                <input type="file" name="foto" class="form-control">
+                                @if (!empty($user->pelanggan->foto))
+                                    <div class="mt-2">
+                                        <img src="{{ asset('storage/' . $user->pelanggan->foto) }}" alt="Foto Pelanggan" width="100">
+                                    </div>
+                                @endif
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Update</button>
-                            <a href="{{ route('karyawan.index') }}" class="btn btn-light">Batal</a>
-                        </form>     
+                            <a href="{{ route('pelanggan.index') }}" class="btn btn-light">Batal</a>
+                        </form>   
                     </div>
                 </div>
                 </div>

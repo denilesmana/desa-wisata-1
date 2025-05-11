@@ -72,7 +72,7 @@
     <!-- partial -->
   </div>
 
-  <script src="{{ asset('backend/ vendors/base/vendor.bundle.base.js') }}"></>
+  <script src="{{ asset('backend/ vendors/base/vendor.bundle.base.js') }}"></script>
   <script src="{{ asset('backend/js/off-canvas.js') }}"></script>
   <script src="{{ asset('backend/js/hoverable-collapse.js') }}"></script>
   <script src="{{ asset('backend/js/template.js') }}"></script>

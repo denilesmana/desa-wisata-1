@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kategori_berita', function (Blueprint $table) {
             $table->id();
-            $table->enum('kategori_berita', ['informasi', 'tentang_wisata', 'acara']);
+            $table->string('kategori_berita', 255);
             $table->timestamps();
         });
     }

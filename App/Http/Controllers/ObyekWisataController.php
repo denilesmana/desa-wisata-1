@@ -63,7 +63,7 @@ class ObyekWisataController extends Controller
             $validatedData['foto4'] = $request->file('foto4')->store('obyek-wisata-images', 'public');
         }
         if ($request->file('foto5')) {
-            $validatedData['foto5'] = $request->file('foto')->store('obyek-wisata-images', 'public');
+            $validatedData['foto5'] = $request->file('foto5')->store('obyek-wisata-images', 'public');
         }
 
         ObyekWisata::create($validatedData);
@@ -111,20 +111,16 @@ class ObyekWisataController extends Controller
         'foto5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
     ]);
 
-    // Handle file uploads
     $photoFields = ['foto1', 'foto2', 'foto3', 'foto4', 'foto5'];
     
     foreach ($photoFields as $field) {
         if ($request->hasFile($field)) {
-            // Delete old file if exists
             if ($obyekWisata->$field) {
                 Storage::delete($obyekWisata->$field);
             }
             
-            // Store new file
             $validatedData[$field] = $request->file($field)->store('obyek-wisata-images', 'public');
         } else {
-            // Keep existing file if no new file uploaded
             $validatedData[$field] = $obyekWisata->$field;
         }
     }

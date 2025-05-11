@@ -26,10 +26,17 @@ Route::delete('/users/{user}', [App\Http\Controllers\UsersController::class, 'de
 
 //Karyawan
 Route::get('/karyawan', [App\Http\Controllers\KaryawanController::class, 'index'])->name('karyawan.index');
-
+Route::get('/karyawan/{karyawan}/edit', [App\Http\Controllers\KaryawanController::class, 'edit'])->name('karyawan.edit');
+Route::put('/karyawan/{karyawan}', [App\Http\Controllers\KaryawanController::class, 'update'])->name('karyawan.update');
+Route::delete('/karyawan/{karyawan}', [App\Http\Controllers\KaryawanController::class, 'destroy'])->name('karyawan.destroy');
 
 //Pelanggan
-// Route::get('/pelanggan', [App\Http\Controllers\PelangganController::class, 'index'])->name('pelanggan.index');
+Route::get('/pelanggan', [App\Http\Controllers\PelangganController::class, 'index'])->name('pelanggan.index');
+Route::get('/pelanggan/create', [App\Http\Controllers\PelangganController::class, 'create'])->name('pelanggan.create');
+Route::post('/pelanggan', [App\Http\Controllers\PelangganController::class, 'store'])->name('pelanggan.store');
+Route::get('/pelanggan/{pelanggan}/edit', [App\Http\Controllers\PelangganController::class, 'edit'])->name('pelanggan.edit');
+Route::put('/pelanggan/{pelanggan}', [App\Http\Controllers\PelangganController::class, 'update'])->name('pelanggan.update');
+Route::delete('/pelanggan/{pelanggan}', [App\Http\Controllers\PelangganController::class, 'destroy'])->name('pelanggan.destroy');
 
 //Berita
 Route::get('/berita', [App\Http\Controllers\BeritaController::class, 'index'])->name('berita.index');
@@ -74,7 +81,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/admin', [App\Http\Controllers\DashboardController::class, 'index']);
     Route::get('/admin/bendahara', [App\Http\Controllers\DashboardController::class, 'bendahara'])->middleware('UserAccess:bendahara');
     Route::get('/admin/pemilik', [App\Http\Controllers\DashboardController::class, 'pemilik'])->middleware('UserAccess:pemilik');
-    Route::get('/pelanggan', [App\Http\Controllers\DashboardController::class, 'pelanggan'])->middleware('UserAccess:pelanggan');
+    // Route::get('/karyawan', [App\Http\Controllers\DashboardController::class, 'karyawan'])->middleware('UserAccess:karyawan');
+    // Route::get('/dashboard-karyawan', [App\Http\Controllers\DashboardController::class, 'karyawan'])->middleware('UserAccess:karyawan');
+
     
     Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 });

@@ -17,14 +17,9 @@
               <form action="{{ route('kategori_wisata.store') }}" method="POST">
                 @csrf            
 
-                <div class="form-group">
+                 <div class="form-group">
                     <label for="exampleSelectGender">Kategori Wisata</label>
-                    <select class="form-control" name="kategori_wisata" id="kategori_iwsata" required>
-                      <option value="">-- Pilih Kategori --</option>
-                      <option value="wisata_alam">Wisata Alam</option>
-                      <option value="wisata_budaya">Wisata Budaya</option>
-                      <option value="wisata_kuliner">Wisata Kuliner</option>
-                  </select>
+                    <input type="text" name="kategori_wisata" class="form-control" id="kategori_wisata" placeholder="Kategori Wisata" required>
                 </div>
             
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>

@@ -33,9 +33,14 @@ class KategoriBeritaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'kategori_berita' => 'required|string|max:255',
+        ]);
+
         KategoriBerita::create([
             'kategori_berita' => $request->kategori_berita,
         ]);
+
 
         return redirect('/kategori_berita')->with('success', 'Kategori Berita berhasil ditambahkan');
     }
@@ -65,7 +70,7 @@ class KategoriBeritaController extends Controller
     public function update(Request $request, KategoriBerita $kategori_berita)
     {
         $validatedData = $request->validate([
-            'kategori_berita' => 'required',
+            'kategori_berita' => 'required|string|max:255',
         ]);
 
         KategoriBerita::where('id', $kategori_berita->id)

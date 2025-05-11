@@ -19,12 +19,7 @@
 
                 <div class="form-group">
                     <label for="exampleSelectGender">Kategori Berita</label>
-                    <select class="form-control" name="kategori_berita" id="kategori_berita" required>
-                      <option value="">-- Pilih Kategori --</option>
-                      <option value="informasi">Informasi</option>
-                      <option value="tentang_wisata">Tentang Wisata</option>
-                      <option value="acara">Acara</option>
-                  </select>
+                    <input type="text" name="kategori_berita" class="form-control" id="kategori_berita" placeholder="Kategori Berita" required>
                 </div>
             
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>

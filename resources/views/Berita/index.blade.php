@@ -40,7 +40,13 @@
                           <td>{{ $item->judul}}</td>
                           <td>{{ $item->berita}}</td>
                           <td>{{ date('d-m-Y', strtotime($item->tgl_post))}}</td>
-                          <td>{{ ucfirst(str_replace('_', ' ', $item->kategori_berita->kategori_berita )) }}</td>
+                          <td>
+                              @if($item->kategori_berita)
+                                  {{ ucwords(str_replace('_', ' ', $item->kategori_berita->kategori_berita)) }}
+                              @else
+                                  <span class="text-muted">-</span>
+                              @endif
+                          </td>
                           <td>
                             @if ($item->foto)
                               <img src="{{ asset('storage/' . $item->foto) }}" alt="Foto" width="100">

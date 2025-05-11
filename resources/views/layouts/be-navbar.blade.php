@@ -8,6 +8,8 @@
   <title>Staydesa | {{ $title }}</title>
   <link rel="icon" href="{{ asset('frontend/images/logo.png') }}">
 
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('backend/vendors/ti-icons/css/themify-icons.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/vendors/base/vendor.bundle.base.css') }}">
@@ -136,51 +138,46 @@
               </a>
             </div>
           </li>
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="{{ asset('/backend/images/faces/face28.jpg') }}" alt="profile"/>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item d-flex align-items-center">
-                    <i class="ti-settings text-primary mr-2"></i> Settings
+          <ul class="navbar-nav navbar-nav-right">
+            <!-- ... item lainnya ... -->
+            
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" data-toggle="dropdown">
+                <img src="{{ asset('/backend/images/faces/face28.jpg') }}" alt="profile">
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="ti-settings text-primary"></i> Settings
                 </a>
-                <form action="{{ route('logout') }}" method="POST" class="m-0">
+                <form action="{{ route('logout') }}" method="POST">
                   @csrf
-                  <button type="submit" class="dropdown-item d-flex align-items-center">
-                      <i class="ti-power-off text-danger mr-2"></i> Logout
+                  <button type="submit" class="dropdown-item">
+                    <i class="ti-power-off text-danger"></i> Logout
                   </button>
-                </form>              
-            </div>            
-          </li>
-        </ul>
+                </form>
+              </div>
+            </li>
+          </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="ti-view-list"></span>
         </button>
       </div>
     </nav>
 
+  
+    
 
-  <script src="{{ asset('backend/../../vendors/base/vendor.bundle.base.js') }}"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="{{ asset('backend/../../js/off-canvas.js') }}"></script>
-  <script src="{{ asset('backend/../../js/hoverable-collapse.js') }}"></script>
-  <script src="{{ asset('backend/../../js/template.js') }}"></script>
-  <script src="{{ asset('backend/../../js/todolist.js') }}"></script>
-  <script src="{{ asset('backend/vendors/base/vendor.bundle.base.js') }}"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <script src="{{ asset('backend/vendors/chart.js/Chart.min.js') }}"></script>
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="{{ asset('backend/js/off-canvas.js') }}"></script>
-  <script src="{{ asset('backend/js/hoverable-collapse.js') }}"></script>
-  <script src="{{ asset('backend/js/template.js') }}"></script>
-  <script src="{{ asset('backend/js/todolist.js') }}"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="{{ asset('backend/js/dashboard.js') }}"></script>
+  <!-- Pindahkan ini ke sebelum penutup </body> -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Hapus duplikat load script ini -->
+<script src="{{ asset('backend/vendors/base/vendor.bundle.base.js') }}"></script>
+<script src="{{ asset('backend/js/off-canvas.js') }}"></script>
+<script src="{{ asset('backend/js/hoverable-collapse.js') }}"></script>
+<script src="{{ asset('backend/js/template.js') }}"></script>
+<script src="{{ asset('backend/js/todolist.js') }}"></script>
+<script src="{{ asset('backend/js/dashboard.js') }}"></script>
 
         

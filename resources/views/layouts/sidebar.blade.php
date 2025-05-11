@@ -17,6 +17,13 @@
             </a>
           </li>
 
+          <li class="nav-item {{ Request::is('penginapan') ? 'active' : '' }}">
+            <a class="nav-link" href="/penginapan">  
+              <i class="ti-home menu-icon"></i> 
+              <span class="menu-title">Penginapan</span>
+            </a>
+          </li>
+
           <li class="nav-item {{ Request::is('paket_wisata') ? 'active' : '' }}">
             <a class="nav-link" href="/paket_wisata">  
               <i class="ti-briefcase menu-icon"></i>

@@ -32,7 +32,7 @@
                         @foreach ($kategori_berita as $item)
                         <tr>
                           <td>{{ $loop->iteration }}</td> 
-                          <td>{{ ucfirst(str_replace('_', ' ', $item->kategori_berita)) }}</td>
+                          <td>{{ $item->kategori_berita }}</td>
                           <td>
                             <a href="{{ route('kategori_berita.edit', $item->id) }}" class="btn btn-sm btn-primary">
                                 <i class="fas fa-edit"></i> Edit

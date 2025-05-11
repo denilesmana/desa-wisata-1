@@ -19,12 +19,10 @@
                 @method('PUT')
                 <div class="form-group">
                     <label for="kategori_berita">Kategori Berita</label>
-                    <select class="form-control" name="kategori_berita" id="kategori_berita" required>
-                    <option value="">-- Pilih Kategori --</option>
-                    <option value="informasi" {{ $kategori_berita->kategori_berita == 'informasi' ? 'selected' : '' }}>Informasi</option>
-                    <option value="tentang_wisata" {{ $kategori_berita->kategori_berita == 'tentang_wisata' ? 'selected' : '' }}>Tentang Wisata</option>
-                    <option value="acara" {{ $kategori_berita->kategori_berita == 'acara' ? 'selected' : '' }}>Acara</option>
-                    </select>
+                    <input type="text" name="kategori_berita" class="form-control" id="kategori_berita" value="{{ old('kategori_berita', $kategori_berita->kategori_berita) }}" placeholder="Kategori Berita" required>
+                    @error('kategori_berita')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Update</button>
                 <button type="button" class="btn btn-light" onclick="window.history.back()">Cancel</button>

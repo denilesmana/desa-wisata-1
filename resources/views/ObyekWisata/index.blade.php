@@ -38,7 +38,13 @@
                       <td>{{ $loop->iteration }}</td> 
                       <td>{{ $item->nama_wisata }}</td>
                       <td>{{ $item->deskripsi_wisata }}</td>
-                      <td>{{ ucfirst(str_replace('_', ' ', $item->kategori_wisata->kategori_wisata )) }}</td>
+                      <td>
+                          @if($item->kategori_wisata)
+                            {{ ucwords(str_replace('_', ' ', $item->kategori_wisata->kategori_wisata)) }}
+                          @else
+                            <span class="text-muted">-</span>
+                          @endif
+                      </td>
                       <td>{{ $item->fasilitas }}</td>
                       <td>
                         @if ($item->foto1)

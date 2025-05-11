@@ -13,7 +13,7 @@ class KategoriWisataController extends Controller
      */
     public function index()
 {
-    $kategori_wisata = KategoriWisata::all(); // Ambil semua data kategori_wisata
+    $kategori_wisata = KategoriWisata::all(); 
     return view('KategoriWisata.index', compact('kategori_wisata'), [
         'title' => 'Kategori Wisata',
     ]);
@@ -35,8 +35,12 @@ class KategoriWisataController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'kategori_wisata' => 'required|string|max:255',
+        ]);
+
         KategoriWisata::create([
-            'kategori_berita' => $request->kategori_wisata,
+            'kategori_wisata' => $request->kategori_wisata,
         ]);
 
         return redirect('/kategori_wisata')->with('success', 'Kategori Wisata berhasil ditambahkan');
@@ -67,7 +71,7 @@ class KategoriWisataController extends Controller
     public function update(Request $request, KategoriWisata $kategori_wisata)
     {
         $validatedData = $request->validate([
-            'kategori_wisata' => 'required',
+            'kategori_wisata' => 'required|string|max:255',
         ]);
 
         KategoriWisata::where('id', $kategori_wisata->id)

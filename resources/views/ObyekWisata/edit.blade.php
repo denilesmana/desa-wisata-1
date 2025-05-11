@@ -34,13 +34,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="kategori_wisata_id" class="form-label">Kategori Wisata</label>
-                    <select name="id_kategori_wisata" id="kategori_wisata_id" class="form-control" required>
-                      <option value="">-- Pilih Kategori --</option>
-                      @foreach ($kategori_wisata as $item)
-                        <option value="{{ $item->id }}">{{ ucfirst(str_replace('_', ' ', $item->kategori_wisata)) }}</option>
+                  <label for="id_kategori_wisata">Kategori Wisata</label>
+                  <select name="id_kategori_wisata" class="form-control" required>
+                      @foreach($kategori_wisata as $kategori)
+                          <option value="{{ $kategori->id }}" 
+                              {{ (old('id_kategori_wisata', $berita->id_kategori_wisata ?? '') == $kategori->id) ? 'selected' : '' }}>
+                              {{ ucwords(str_replace('_', ' ', $kategori->kategori_wisata)) }}
+                          </option>
                       @endforeach
-                    </select>
+                  </select>
+                  @error('id_kategori_wisata')
+                      <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
 
                 <div class="form-group">

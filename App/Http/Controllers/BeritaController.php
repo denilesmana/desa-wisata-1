@@ -95,12 +95,10 @@ class BeritaController extends Controller
     $berita = Berita::findOrFail($id);
 
     if ($request->file('foto')) {
-        // Hapus foto lama jika ada
         if ($berita->foto && Storage::disk('public')->exists($berita->foto)) {
             Storage::disk('public')->delete($berita->foto);
         }
 
-        // Simpan foto baru
         $validatedData['foto'] = $request->file('foto')->store('berita-images', 'public');
     }
 

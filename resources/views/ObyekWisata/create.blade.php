@@ -28,13 +28,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="kategori_wisata_id" class="form-label">Kategori Wisata</label>
-                    <select name="id_kategori_wisata" id="kategori_wisata_id" class="form-control" required>
-                      <option value="">-- Pilih Kategori --</option>
-                      @foreach ($kategori_wisata as $item)
-                        <option value="{{ $item->id }}">{{ ucfirst(str_replace('_', ' ', $item->kategori_wisata)) }}</option>
-                      @endforeach
-                    </select>
+                  <label for="kategori_wisata_id" class="form-label">Kategori Wisata</label>
+                  <select name="id_kategori_wisata" id="kategori_wisata_id" class="form-control" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    @foreach ($kategori_wisata as $item)
+                      <option value="{{ $item->id }}">{{ ucfirst(str_replace('_', ' ', $item->kategori_wisata)) }}</option>
+                    @endforeach
+                  </select>
                 </div>
 
                 <div class="form-group">

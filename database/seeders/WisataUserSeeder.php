@@ -27,9 +27,9 @@ class WisataUserSeeder extends Seeder
                 'password' => bcrypt('12345678')
             ],
             [
-                'name' => 'Pelanggan Staydesa',
-                'email' => 'pelanggan@gmail.com',
-                'level' => 'pelanggan',
+                'name' => 'karyawan Staydesa',
+                'email' => 'karyawan@gmail.com',
+                'level' => 'karyawan',
                 'password' => bcrypt('12345678')
             ],
             [

@@ -30,10 +30,17 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function karyawan()
+    {
+        return view('be.dashboard', [
+            'title' => 'Karyawan'
+        ]);
+    }
+
     public function pelanggan()
     {
         return view('fe.home', [
-            'title' => 'Home'
+            'title' => 'Pelanggan'
         ]);
     }
 
