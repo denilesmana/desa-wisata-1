@@ -9,12 +9,16 @@ Route::resource('/home', App\Http\Controllers\HomeController::class);
 Route::resource('/destination', App\Http\Controllers\DestinationController::class);
 Route::resource('/about', App\Http\Controllers\AboutController::class);
 Route::resource('/contact', App\Http\Controllers\ContactController::class);
-Route::resource('/blog', App\Http\Controllers\BlogController::class);
 Route::resource('/booking', App\Http\Controllers\BookingController::class);
+
+
+//Berita
+Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog');
+Route::get('/berita/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('berita.show');
+
 
 // Backend
 Route::resource('/dashboard', App\Http\Controllers\DashboardController::class);
-Route::resource('/paket_wisata', App\Http\Controllers\PaketWisataController::class);
 
 //User
 Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('users.index');
@@ -70,6 +74,25 @@ Route::post('/obyek_wisata', [App\Http\Controllers\ObyekWisataController::class,
 Route::get('/obyek_wisata/{obyek_wisata}/edit', [App\Http\Controllers\ObyekWisataController::class, 'edit'])->name('obyek_wisata.edit');
 Route::put('/obyek_wisata/{obyek_wisata}', [App\Http\Controllers\ObyekWisataController::class, 'update'])->name('obyek_wisata.update');
 Route::delete('/obyek_wisata/{obyek_wisata}', [App\Http\Controllers\ObyekWisataController::class, 'destroy'])->name('obyek_wisata.destroy');
+
+//Penginapan
+Route::get('/penginapan', [App\Http\Controllers\PenginapanController::class, 'index'])->name('penginapan.index');
+Route::get('/penginapan/create', [App\Http\Controllers\PenginapanController::class, 'create'])->name('penginapan.create');
+Route::post('/penginapan', [App\Http\Controllers\PenginapanController::class, 'store'])->name('penginapan.store');
+Route::get('/penginapan/{penginapan}/edit', [App\Http\Controllers\PenginapanController::class, 'edit'])->name('penginapan.edit');
+Route::put('/penginapan/{penginapan}', [App\Http\Controllers\PenginapanController::class, 'update'])->name('penginapan.update');
+Route::delete('/penginapan/{penginapan}', [App\Http\Controllers\PenginapanController::class, 'destroy'])->name('penginapan.destroy');
+
+//Paket Wisata
+Route::get('/paket_wisata', [App\Http\Controllers\PaketWisataController::class, 'index'])->name('paket_wisata.index');
+Route::get('/paket_wisata/create', [App\Http\Controllers\PaketWisataController::class, 'create'])->name('paket_wisata.create');
+Route::post('/paket_wisata', [App\Http\Controllers\PaketWisataController::class, 'store'])->name('paket_wisata.store');
+Route::get('/paket_wisata/{paket_wisata}/edit', [App\Http\Controllers\PaketWisataController::class, 'edit'])->name('paket_wisata.edit');
+Route::put('/paket_wisata/{paket_wisata}', [App\Http\Controllers\PaketWisataController::class, 'update'])->name('paket_wisata.update');
+Route::delete('/paket_wisata/{paket_wisata}', [App\Http\Controllers\PaketWisataController::class, 'destroy'])->name('paket_wisata.destroy');
+
+//Reservasi
+Route::get('/reservasi', [App\Http\Controllers\ReservasiController::class, 'index'])->name('reservasi.index');
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [App\Http\Controllers\LoginController::class, 'index']);

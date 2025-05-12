@@ -51,11 +51,11 @@
             <div class="col-10 col-md-8 d-none d-xl-block">
               <nav class="site-navigation position-relative text-right text-lg-center" role="navigation">
                 <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
-                  <li><a class="{{ Request::is('home') ? 'active' : '' }}" href="/home">Home</a></li>
-                  <li><a class="{{ Request::is('destination') ? 'active' : '' }}" href="destination">Destinations</a></li>              
-                  <li><a class="{{ Request::is('about') ? 'active' : '' }}" href="about">About</a></li>
-                  <li><a class="{{ Request::is('blog') ? 'active' : '' }}" href="blog">Blog</a></li>
-                  <li><a class="{{ Request::is('contact') ? 'active' : '' }}" href="contact">Contact</a></li>
+                  <li><a class="{{ Request::is('home') ? 'active' : '' }}" href="{{ url('/home') }}">Beranda</a></li>
+                  <li><a class="{{ Request::is('destination') ? 'active' : '' }}" href="{{ url('/destination') }}">Destinasi</a></li>
+                  <li><a class="{{ Request::is('about') ? 'active' : '' }}" href="{{ url('/about') }}">Tentang</a></li>
+                  <li><a class="{{ Request::is('blog') ? 'active' : '' }}" href="{{ url('/blog') }}">Berita</a></li>
+                  <li><a class="{{ Request::is('contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Kontak</a></li>
                 </ul>
               </nav>
             </div>
