@@ -3,6 +3,7 @@
     <!-- partial:partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+          
           <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
             <a class="nav-link" href="/dashboard">  
               <i class="ti-dashboard menu-icon"></i>
@@ -121,6 +122,7 @@
     <script src="{{ asset('backend/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('backend/js/template.js') }}"></script>
     <script src="{{ asset('backend/js/todolist.js') }}"></script>
+    <script src="{{ asset('backend/path-to-your-template/js/file-upload.js') }}"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
     <script src="{{ asset('backend/js/dashboard.js') }}"></script>

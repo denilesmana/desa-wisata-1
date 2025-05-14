@@ -1,15 +1,31 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 // Frontend
 
 Route::resource('/', App\Http\Controllers\HomeController::class);
-Route::resource('/home', App\Http\Controllers\HomeController::class);
 Route::resource('/destination', App\Http\Controllers\DestinationController::class);
 Route::resource('/about', App\Http\Controllers\AboutController::class);
 Route::resource('/contact', App\Http\Controllers\ContactController::class);
 Route::resource('/booking', App\Http\Controllers\BookingController::class);
+
+//Home
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/kategori/{id}/obyek-wisata', [App\Http\Controllers\HomeController::class, 'obyekWisataByKategori'])->name('kategori.obyek_wisata');
+Route::get('/penginapan/{id}', [\App\Http\Controllers\HomeController::class, 'showPenginapan'])->name('penginapan.show');
+Route::get('/paket/{id}', [App\Http\Controllers\HomeController::class, 'showPaket'])->name('paket_wisata.show');
+
+// Profile 
+Route::prefix('profile')->group(function() {
+    Route::get('/', [App\Http\Controllers\ProfilController::class, 'index'])->name('profile.index');
+    Route::get('/edit', [App\Http\Controllers\ProfilController::class, 'edit'])->name('profile.edit');
+    Route::put('/update', [App\Http\Controllers\ProfilController::class, 'update'])->name('profile.update');
+});
+
+//Reservasi
+Route::post('/reservasi', [App\Http\Controllers\ReservasiController::class, 'store'])->name('reservasi.store');
 
 
 //Berita
@@ -95,22 +111,23 @@ Route::delete('/paket_wisata/{paket_wisata}', [App\Http\Controllers\PaketWisataC
 Route::get('/reservasi', [App\Http\Controllers\ReservasiController::class, 'index'])->name('reservasi.index');
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/login', [App\Http\Controllers\LoginController::class, 'index']);
-    Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'])->name('login');
+    Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
+    Route::post('/login', [App\Http\Controllers\LoginController::class, 'login']);
 });
- 
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/admin', [App\Http\Controllers\DashboardController::class, 'index']);
     Route::get('/admin/bendahara', [App\Http\Controllers\DashboardController::class, 'bendahara'])->middleware('UserAccess:bendahara');
     Route::get('/admin/pemilik', [App\Http\Controllers\DashboardController::class, 'pemilik'])->middleware('UserAccess:pemilik');
-    // Route::get('/karyawan', [App\Http\Controllers\DashboardController::class, 'karyawan'])->middleware('UserAccess:karyawan');
-    // Route::get('/dashboard-karyawan', [App\Http\Controllers\DashboardController::class, 'karyawan'])->middleware('UserAccess:karyawan');
-
-    
     Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 });
 
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('/reservasi/create', [App\Http\Controllers\ReservasiController::class, 'create'])->name('reservasi.create');
+    Route::post('/reservasi', [App\Http\Controllers\ReservasiController::class, 'store'])->name('reservasi.store');
+    Route::post('/reservasi/calculate', [App\Http\Controllers\ReservasiController::class, 'calculate'])->name('reservasi.calculate');
+});
 
 Route::get('/register', [App\Http\Controllers\RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [App\Http\Controllers\RegisterController::class, 'store']);

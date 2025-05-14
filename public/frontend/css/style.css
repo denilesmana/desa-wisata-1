@@ -3,7 +3,9 @@ body {
   line-height: 1.7;
   color: #4d4d4d;
   font-weight: 300;
-  font-size: 1rem; }
+  font-size: 1rem; 
+  padding-top: 50px;
+}
 
 ::-moz-selection {
   background: #000;
@@ -230,9 +232,13 @@ h1, h2, h3, h4, h5,
 
 /* Navbar */
 .site-navbar {
-  margin-bottom: 0px;
-  z-index: 1999;
-  position: relative; }
+   position: fixed; /* atau gunakan sticky */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* lebih rendah dari modal */
+  background-color: #fff; /* biar nggak transparan pas di-scroll */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.10); }
   .site-navbar.transparent {
     background: transparent; }
   .site-navbar.absolute {

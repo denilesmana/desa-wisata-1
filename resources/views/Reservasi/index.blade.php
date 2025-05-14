@@ -29,64 +29,33 @@
                     <th>Status</th>
                   </tr>
                 </thead>
-                {{-- <tbody>
-                    @foreach ($penginapan as $item)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td> 
-                        <td>{{ $item->nama_penginapan }}</td>
-                        <td>{{ $item->deskripsi }}</td>
-                        <td>{{ $item->fasilitas }}</td>
-                        <td>
-                            @if ($item->foto1)
-                                <img src="{{ asset('storage/' . $item->foto1) }}" alt="Foto" width="100">
-                            @else
-                                Tidak ada foto
-                            @endif
-                        </td>
-                        <td>
-                            @if ($item->foto2)
-                                <img src="{{ asset('storage/' . $item->foto2) }}" alt="Foto" width="100">
-                            @else
-                                Tidak ada foto
-                            @endif
-                        </td>
-                        <td>
-                            @if ($item->foto3)
-                                <img src="{{ asset('storage/' . $item->foto3) }}" alt="Foto" width="100">
-                            @else
-                                Tidak ada foto
-                            @endif
-                        </td>
-                        <td>
-                            @if ($item->foto4)
-                                <img src="{{ asset('storage/' . $item->foto4) }}" alt="Foto" width="100">
-                            @else
-                                Tidak ada foto
-                            @endif
-                        </td>
-                        <td>
-                            @if ($item->foto5)
-                                <img src="{{ asset('storage/' . $item->foto5) }}" alt="Foto" width="100">
-                            @else
-                                Tidak ada foto
-                            @endif
-                        </td>
-                        <td>
-                        <a href="{{ route('penginapan.edit', $item->id) }}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-edit"></i> Edit
-                        </a>
-                        <form action="{{ route('penginapan.destroy', $item->id) }}" method="POST" style="display:inline;">
-                          @csrf
-                          @method('DELETE')
-                          <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data ini?')">
-                              <i class="fas fa-trash"></i> Hapus
-                          </button>
-                        </form>
-                      </td>
-                    </tr>
-                        
-                    @endforeach
-                </tbody> --}}
+                <tbody>
+                @foreach($reservasi as $key => $item)
+                <tr>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{ $item->pelanggan->user->name ?? '-' }}</td>
+                    <td>{{ $item->paketWisata->nama_paket ?? '-' }}</td>
+                    <td>{{ $item->tgl_reservasi_wisata }}</td>
+                    <td>Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
+                    <td>{{ $item->jumlah_peserta }}</td>
+                    <td>{{ $item->diskon }}%</td>
+                    <td>Rp {{ number_format($item->nilai_diskon, 0, ',', '.') }}</td>
+                    <td>Rp {{ number_format($item->total_bayar, 0, ',', '.') }}</td>
+                    <td>
+                        @if ($item->file_bukti_tf)
+                            <a href="{{ asset('storage/' . $item->file_bukti_tf) }}" target="_blank">Lihat</a>
+                        @else
+                            Tidak ada
+                        @endif
+                    </td>
+                    <td>
+                        <span class="badge bg-info text-dark">{{ ucfirst($item->status_reservasi_wisata) }}</span>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+
+                
                 
               </table>
             </div>

@@ -69,7 +69,7 @@
                     @endif
                     @error('foto2')
                       <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror  
                 </div>
 
                 <div class="form-group">
@@ -86,7 +86,7 @@
                     @endif
                     @error('foto3')
                       <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror  
                 </div>
 
                 <div class="form-group">
@@ -103,7 +103,7 @@
                     @endif
                     @error('foto4')
                       <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror  
                 </div>
 
                 <div class="form-group">
@@ -120,10 +120,8 @@
                     @endif
                     @error('foto5')
                       <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror  
                 </div>
-
-                
 
                 <button type="submit" class="btn btn-primary mr-2">Update</button>
                 <button type="button" class="btn btn-light" onclick="window.history.back()">Cancel</button>

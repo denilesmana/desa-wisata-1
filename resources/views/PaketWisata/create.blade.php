@@ -33,9 +33,9 @@
 
                 <div class="mb-3">
                     <label>Harga Paket</label>
-                    <input type="text" id="harga_display" class="form-control" placeholder="Contoh: Rp 150.000">
-                    <input type="hidden" name="harga_per_pack" id="harga_per_pack" required>
+                    <input type="number" name="harga_per_pack" class="form-control" id="harga_per_pack" required placeholder="Contoh: 150000">
                 </div>
+
 
 
                 <div class="form-group">

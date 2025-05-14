@@ -179,5 +179,8 @@
 <script src="{{ asset('backend/js/template.js') }}"></script>
 <script src="{{ asset('backend/js/todolist.js') }}"></script>
 <script src="{{ asset('backend/js/dashboard.js') }}"></script>
+{{-- <script src="{{ asset('path-to-your-template/js/file-upload.js') }}"></script> --}}
+<script src="{{ asset('backend/vendors/js/vendor.bundle.base.js') }}"></script>
+<script src="{{ asset('backend/js/file-upload.js') }}"></script>
 
         

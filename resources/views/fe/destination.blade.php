@@ -20,162 +20,55 @@
     
 
     <div class="site-section">
-      
       <div class="container">
-        
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
-              <img src="/frontend/images/01-greece.jpg" alt="Image" class="img-fluid">
-              <div class="unit-1-text">
-                <strong class="text-primary mb-2 d-block">$590</strong>
-                <h3 class="unit-1-heading">Santorini, Greece</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
-              <img src="/frontend/images/02-rome.jpg" alt="Image" class="img-fluid">
-              <div class="unit-1-text">
-                <strong class="text-primary mb-2 d-block">$390</strong>
-                <h3 class="unit-1-heading">Rome, Italy</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
-              <img src="/frontend/images/03-japan.jpg" alt="Image" class="img-fluid">
-              <div class="unit-1-text">
-                <strong class="text-primary mb-2 d-block">$390</strong>
-                <h3 class="unit-1-heading">Mount Fuji, Japan</h3>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
-              <img src="/frontend/images/04-dubai.jpg" alt="Image" class="img-fluid">
-              <div class="unit-1-text">
-                <strong class="text-primary mb-2 d-block">$320</strong>
-                <h3 class="unit-1-heading">Camels, Dubai</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
-              <img src="/frontend/images/05-london.jpg" alt="Image" class="img-fluid">
-              <div class="unit-1-text">
-                <strong class="text-primary mb-2 d-block">$290</strong>
-                <h3 class="unit-1-heading">Elizabeth Tower, London</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="#" class="unit-1 text-center">
-              <img src="/frontend/images/06-australia.jpg" alt="Image" class="img-fluid">
-              <div class="unit-1-text">
-                <strong class="text-primary mb-2 d-block">$390</strong>
-                <h3 class="unit-1-heading">Opera House, Australia</h3>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    
-    </div>
-
-    <div class="site-section block-13 bg-light">
-  
-
-    <div class="container">
         <div class="row justify-content-center mb-5">
-          <div class="col-md-7">
-            <h2 class="font-weight-light text-black text-center">What People Says</h2>
+          <div class="col-md-7 text-center">
+            <h2 class="font-weight-light text-black">Paket Wisata Kami</h2>
+            <p class="color-black-opacity-5">Temukan Liburan Terbaik Anda</p>
           </div>
         </div>
-
-        <div class="nonloop-block-13 owl-carousel">
-
-          <div class="item">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 mb-5">
-                  <img src="/frontend/images/img_1.jpg" alt="Image" class="img-md-fluid">
-                </div>
-                <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>James Martin</em>, <a href="#">Traveler</a></p>
-                </div>
+        <div class="row">
+          @foreach ($paket_wisata as $paket)
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+            <a href="{{ route('paket_wisata.show', $paket->id) }}" class="unit-1 text-center">
+              <img src="{{ asset('storage/' . $paket->foto1) }}" alt="Image" class="img-fluid">
+              <div class="unit-1-text">
+                <strong class="text-primary mb-2 d-block">Rp {{ number_format($paket->harga_per_pack, 0, ',', '.') }}</strong>
+                <h3 class="unit-1-heading">{{ $paket->nama_paket }}</h3>
               </div>
-            </div>
+            </a>
           </div>
-
-          <div class="item">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 mb-5">
-                  <img src="/frontend/images/img_2.jpg" alt="Image" class="img-md-fluid">
-                </div>
-                <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>Clair Augustin</em>, <a href="#">Traveler</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 mb-5">
-                  <img src="/frontend/images/img_4.jpg" alt="Image" class="img-md-fluid">
-                </div>
-                <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>James Martin</em>, <a href="#">Traveler</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          @endforeach
         </div>
       </div>
     </div>
 
     <div class="site-section">
       <div class="container">
-        <div class="row align-items-stretch">
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-            <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary flaticon-airplane"></span></div>
-              <div>
-                <h3>Air Ticketing</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
-              </div>
-            </div>
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center">
+            <h2 class="font-weight-light text-black">Kategori Wisata</h2>
+            <p class="color-black-opacity-5">Temukan Tempat Wisata Sesuai Kategori Favoritmu</p>
           </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-            <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary flaticon-ship"></span></div>
-              <div>
-                <h3>Cruises</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-            <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary flaticon-route"></span></div>
-              <div>
-                <h3>Tour Packages</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div class="row">
+          @php
+            $icons = ['bi-tree', 'bi-house-door', 'bi-egg-fried', 'bi-geo-alt', 'bi-geo-alt'];
+            $iconIndex = 0; // Initialize counter
+          @endphp
 
+          @foreach($kategori_wisata as $kategori)
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="unit-4 text-center p-5 border h-100 d-flex flex-column justify-content-center align-items-center shadow-sm">
+                <div class="unit-4-icon mb-4">
+                  <i class="{{ $icons[$iconIndex % count($icons)] }} text-danger" style="font-size: 2.5rem; font-weight: 400; opacity: 0.85;"></i>
+                </div>
+                <h3 class="h3 font-weight-bold mb-2">{{ $kategori->kategori_wisata }}</h3>
+                <p><a href="{{ route('kategori.obyek_wisata', $kategori->id) }}" class="text-danger">Lihat Wisata</a></p>
+              </div>
+            </div>
+            @php $iconIndex++; @endphp
+          @endforeach
         </div>
       </div>
     </div>

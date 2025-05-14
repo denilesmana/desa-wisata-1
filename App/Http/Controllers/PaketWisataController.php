@@ -37,35 +37,30 @@ class PaketWisataController extends Controller
         $validatedData = $request->validate([
             'nama_paket' => 'required|max:255',
             'deskripsi' => 'required',
-            'fasilitas' => 'required|max:255',
+            'fasilitas' => 'required',
             'harga_per_pack' => 'required|numeric',
-            'foto1' => 'image|file|max:2048',
+            'foto1' => 'required|image|file|max:2048',
             'foto2' => 'image|file|max:2048',
             'foto3' => 'image|file|max:2048',
             'foto4' => 'image|file|max:2048',
             'foto5' => 'image|file|max:2048'
         ]);
 
-        // Store the images
-        if ($request->hasFile('foto1')) {
-            $validatedData['foto1'] = $request->file('foto1')->store('paket-wisata-images', 'public');
-        }
-        if ($request->hasFile('foto2')) {
-            $validatedData['foto2'] = $request->file('foto2')->store('paket-wisata-images', 'public');
-        }
-        if ($request->hasFile('foto3')) {
-            $validatedData['foto3'] = $request->file('foto3')->store('paket-wisata-images', 'public');
-        }
-        if ($request->hasFile('foto4')) {
-            $validatedData['foto4'] = $request->file('foto4')->store('paket-wisata-images', 'public');
-        }
-        if ($request->hasFile('foto5')) {
-            $validatedData['foto5'] = $request->file('foto5')->store('paket-wisata-images', 'public');
-        }
+        try {
+            // Handle file uploads
+            $photoFields = ['foto1', 'foto2', 'foto3', 'foto4', 'foto5'];
+            foreach ($photoFields as $field) {
+                if ($request->hasFile($field)) {
+                    $validatedData[$field] = $request->file($field)->store('paket-wisata-images', 'public');
+                }
+            }
 
-        PaketWisata::create($validatedData);
-
-        return redirect()->route('paket_wisata.index')->with('success', 'Paket Wisata created successfully.');
+            PaketWisata::create($validatedData);
+            
+            return redirect()->route('paket_wisata.index')->with('success', 'Paket Wisata berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'Gagal menyimpan data: '.$e->getMessage());
+        }
     }
 
     /**

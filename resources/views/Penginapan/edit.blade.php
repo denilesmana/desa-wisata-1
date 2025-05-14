@@ -10,26 +10,35 @@
         <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Tambah Penginapan</h4>
-              <p class="card-description">
-                Isi Form Dibawah ini Untuk Menambahkan Penginapan
-              </p>
-              <form action="{{ route('penginapan.update', $penginapan->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')           
+                <h4 class="card-title">Edit Kategori Wisata</h4>
+                <p class="card-description">
+                Ubah data kategori wisata di bawah ini
+                </p>
+                <form action="{{ route('penginapan.update', $penginapan->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf            
+                @method('PUT')
                 <div class="form-group">
-                    <label for="nama_penginapan">Nama Penginapan</label>
-                    <input type="text" name="nama_penginapan" class="form-control" id="nama_penginapan" value="{{ old('nama_penginapan', $penginapan->nama_penginapan) }}" required>
+                    <label for="exampleInputName1">Nama Penginapan</label>
+                    <input type="text" name="nama_penginapan" class="form-control" id="nama_penginapan" value="{{ old('nama_penginapan', $penginapan->nama_penginapan) }}" placeholder="Nama Wisata">
+                    @error('nama_penginapan')
+                      <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
-                    <textarea name="deskripsi" class="form-control" id="deskripsi" rows="5" required>{{ old('deskripsi', $penginapan->deskripsi) }}</textarea>
+                    <label for="exampleInputName1">Deskripsi</label>
+                    <textarea name="deskripsi" class="form-control" id="deskripsi" placeholder="Deskripsi">{{ old('deskripsi', $penginapan->deskripsi) }}</textarea>
+                    @error('deskripsi')
+                      <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="fasilitas">Fasilitas</label>
-                    <input type="text" name="fasilitas" class="form-control" id="fasilitas" value="{{ old('fasilitas', $penginapan->fasilitas) }}" required>
+                    <label for="exampleInputName1">Fasilitas</label>
+                    <input type="text" name="fasilitas" class="form-control" id="fasilitas" value="{{ old('fasilitas', $penginapan->fasilitas) }}" placeholder="Nama Wisata">
+                    @error('fasilitas')
+                      <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
@@ -63,7 +72,7 @@
                     @endif
                     @error('foto2')
                       <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror  
                 </div>
 
                 <div class="form-group">
@@ -80,7 +89,7 @@
                     @endif
                     @error('foto3')
                       <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror  
                 </div>
 
                 <div class="form-group">
@@ -97,7 +106,7 @@
                     @endif
                     @error('foto4')
                       <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror  
                 </div>
 
                 <div class="form-group">
@@ -114,14 +123,12 @@
                     @endif
                     @error('foto5')
                       <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror  
                 </div>
-
-                
 
                 <button type="submit" class="btn btn-primary mr-2">Update</button>
                 <button type="button" class="btn btn-light" onclick="window.history.back()">Cancel</button>
-              </form>
+                </form>            
             </div>
           </div>
         </div>
@@ -129,13 +136,22 @@
     </div>
   </div>
 </div>
-    <!-- content-wrapper ends -->
-    <!-- partial:../../partials/_footer.html -->
-    <footer class="footer">
-      <div class="d-sm-flex justify-content-center justify-content-sm-between">
-        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.templatewatch.com/" target="_blank">Templatewatch</a>. All rights reserved.</span>
-        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-      </div>
-    </footer>
-    <!-- partial -->
+
+<!-- content-wrapper ends -->
+<footer class="footer">
+  <div class="d-sm-flex justify-content-center justify-content-sm-between">
+    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 
+      <a href="https://www.templatewatch.com/" target="_blank">Templatewatch</a>. All rights reserved.</span>
+    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+      Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i>
+    </span>
   </div>
+</footer>
+
+<!-- JS Scripts -->
+<script src="{{ asset('backend/vendors/base/vendor.bundle.base.js') }}"></script>
+<script src="{{ asset('backend/js/off-canvas.js') }}"></script>
+<script src="{{ asset('backend/js/hoverable-collapse.js') }}"></script>
+<script src="{{ asset('backend/js/template.js') }}"></script>
+<script src="{{ asset('backend/js/todolist.js') }}"></script>
+<script src="{{ asset('backend/js/file-upload.js') }}"></script>

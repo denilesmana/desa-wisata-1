@@ -17,37 +17,43 @@ class LoginController extends Controller
         ]);
     }
 
-    function login(Request $request)
+    public function login(Request $request)
     {
-        $user = $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($user)) {
-            if(Auth::user()->level == 'pemilik'){
-                return redirect('/admin/pemilik');
-            } elseif (Auth::user()->level == 'bendahara'){
-                return redirect('/admin/bendahara');
-            } elseif (Auth::user()->level == 'karyawan'){
-                return redirect('/karyawan');
+        if(Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            
+            $user = Auth::user();
+            
+            switch ($user->level) {
+                case 'admin':
+                    return redirect()->intended('/admin');
+                case 'pemilik':
+                    return redirect()->intended('/admin/pemilik');
+                case 'bendahara':
+                    return redirect()->intended('/admin/bendahara');
+                case 'pelanggan':
+                    return redirect()->intended('/');
+                default:
+                    Auth::logout();
+                    return redirect('/login')->with('loginError', 'Level akun tidak valid: '.$user->level);
             }
         }
 
-        return back()->with('loginError', 'Login failed!');
-        
-        
+        return back()->withInput()->with('loginError', 'Email atau password salah!');
     }
 
-    public function logout() {
+
+    public function logout() 
+    {
         Auth::logout();
-
         request()->session()->invalidate();
-
         request()->session()->regenerateToken();
-
-        return redirect('login');
-    
+        return redirect('/login');
     }
 
     /**

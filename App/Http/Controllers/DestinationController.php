@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PaketWisata;
+use App\Models\KategoriWisata;
 
 class DestinationController extends Controller
 {
@@ -11,8 +13,12 @@ class DestinationController extends Controller
      */
     public function index()
     {
+        $paket_wisata = PaketWisata::all();
+        $kategori_wisata = KategoriWisata::all();
         return view('fe.destination', [
-            'title' => 'Destination'
+            'title' => 'Destination',
+            'paket_wisata' => $paket_wisata,
+            'kategori_wisata' => $kategori_wisata,
         ]);
     }
 

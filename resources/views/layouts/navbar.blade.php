@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+
+
+
 
 
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap-datepicker.css') }}">
@@ -60,7 +66,46 @@
               </nav>
             </div>
             <div class="col-6 col-xl-2 text-right d-none d-xl-block">
-              <a href="login" class="btn btn-primary text-white px-5 py-2">Login</a>
-            </div>
+            <div class="col-6 col-xl-2 text-right d-none d-xl-block">
+              @guest
+                <a href="{{ route('login') }}" class="btn btn-primary text-white px-5 py-2">Login</a>
+              @endguest
+
+            
+            @auth
+              <div class="dropdown">
+                  <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                    id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      @php
+                          $user = Auth::user();
+                          $foto = optional($user->pelanggan)->foto;
+                      @endphp
+                      
+                      <img src="{{ $foto ? asset('storage/' . $foto) : asset('frontend/images/default-profile.png') }}"
+                        alt="Profile"
+                        class="rounded-circle shadow-sm"
+                        width="50" height="50"
+                        style="object-fit: cover; aspect-ratio: 1 / 1;">
+
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+                      <a class="dropdown-item d-flex align-items-center gap-3" href="{{ route('profile.index') }}">
+                          <i class="ti-user text-primary"></i>
+                          <span>Profil Saya</span>
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <form action="{{ route('logout') }}" method="POST">
+                          @csrf
+                          <button type="submit" class="dropdown-item d-flex align-items-center gap-3">
+                              <i class="ti-power-off text-danger"></i>
+                              <span>Logout</span>
+                          </button>
+                      </form>
+                  </div>
+              </div>
+            @endauth
+
         </div>
       </header>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
