@@ -61,7 +61,6 @@
                   <li><a class="{{ Request::is('destination') ? 'active' : '' }}" href="{{ url('/destination') }}">Destinasi</a></li>
                   <li><a class="{{ Request::is('about') ? 'active' : '' }}" href="{{ url('/about') }}">Tentang</a></li>
                   <li><a class="{{ Request::is('blog') ? 'active' : '' }}" href="{{ url('/blog') }}">Berita</a></li>
-                  <li><a class="{{ Request::is('contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Kontak</a></li>
                 </ul>
               </nav>
             </div>
@@ -81,7 +80,7 @@
                           $foto = optional($user->pelanggan)->foto;
                       @endphp
                       
-                      <img src="{{ $foto ? asset('storage/' . $foto) : asset('frontend/images/default-profile.png') }}"
+                      <img src="{{ $foto ? asset('storage/' . $foto) : asset('frontend/images/default-profile.jpg') }}"
                         alt="Profile"
                         class="rounded-circle shadow-sm"
                         width="50" height="50"

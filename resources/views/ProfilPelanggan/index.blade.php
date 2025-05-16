@@ -51,10 +51,18 @@
                         </div>
 
                         <div class="text-center mt-4">
-                            <a href="{{ route('profile.edit') }}" class="btn btn-primary px-4">
-                                <i class="ti-pencil me-2"></i> Edit Profil
-                            </a>
+                            <div class="d-flex justify-content-center flex-wrap" style="gap: 15px;">
+                                <a href="{{ route('home') }}" class="btn btn-outline-primary px-4 mb-3">
+                                    &lt; Kembali
+                                </a>
+                                
+                                <a href="{{ route('profile.edit') }}" class="btn btn-primary px-4 mb-3">
+                                    <i class="ti-pencil me-2"></i> Edit Profil
+                                </a>
+                            </div>
                         </div>
+
+
                     @else
                         <div class="alert alert-warning text-center">
                             Data profil belum tersedia.

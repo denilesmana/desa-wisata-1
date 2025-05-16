@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage; 
 use App\Models\PaketWisata;
 use App\Models\Pelanggan;
-
+use Illuminate\Support\Facades\DB;
 
 class ReservasiController extends Controller
 {
@@ -25,6 +25,20 @@ class ReservasiController extends Controller
         ]);
     }
 
+    public function updateStatus($id, Request $request)
+    {
+        $validStatuses = ['pesan', 'dibayar', 'selesai'];
+        
+        if (!in_array($request->status, $validStatuses)) {
+            return response()->json(['success' => false, 'message' => 'Status tidak valid']);
+        }
+
+        $reservasi = Reservasi::findOrFail($id);
+        $reservasi->status_reservasi_wisata = $request->status;
+        $reservasi->save();
+
+        return response()->json(['success' => true]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -129,8 +143,7 @@ class ReservasiController extends Controller
         ]);
     }
 
-
-
+    
 
     /**
      * Display the specified resource.

@@ -22,48 +22,61 @@
         <div class="col-md-3 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <p class="card-title text-md-center text-xl-left">Sales</p>
+              <p class="card-title text-md-center text-xl-left">Total Reservasi</p>
               <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">34040</h3>
+                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{{ $totalReservasi }}</h3>
                 <i class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-              </div>  
-              <p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ml-1"><small>(30 days)</small></span></p>
+              </div>
+              <p class="mb-0 mt-2 {{ $percentageChange >= 0 ? 'text-success' : 'text-danger' }}">
+                {{ number_format($percentageChange, 2) }}% 
+                <span class="text-black ml-1"><small>(30 days)</small></span>
+              </p>
             </div>
           </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <p class="card-title text-md-center text-xl-left">Revenue</p>
-              <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">47033</h3>
+              <p class="card-title text-md-center text-xl-left">Total Users</p>
+            <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{{ $totalUsers }}</h3>
                 <i class="ti-user icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-              </div>  
-              <p class="mb-0 mt-2 text-danger">0.47% <span class="text-black ml-1"><small>(30 days)</small></span></p>
+            </div>
+            <p class="mb-0 mt-2 {{ $percentageChangeUsers >= 0 ? 'text-success' : 'text-danger' }}">
+                {{ number_format($percentageChangeUsers, 2) }}% 
+                <span class="text-black ml-1"><small>(30 days)</small></span>
+            </p>
             </div>
           </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <p class="card-title text-md-center text-xl-left">Downloads</p>
-              <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">40016</h3>
-                <i class="ti-agenda icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-              </div>  
-              <p class="mb-0 mt-2 text-success">64.00%<span class="text-black ml-1"><small>(30 days)</small></span></p>
+              <p class="card-title text-md-center text-xl-left">Total Paket Wisata</p>
+            <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{{ $totalPaketWisata }}</h3>
+                <i class="ti-map-alt icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+            </div>
+            <p class="mb-0 mt-2 {{ $percentageChangePaket >= 0 ? 'text-success' : 'text-danger' }}">
+                {{ number_format($percentageChangePaket, 2) }}% 
+                <span class="text-black ml-1"><small>(30 days)</small></span>
             </div>
           </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <p class="card-title text-md-center text-xl-left">Returns</p>
-              <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">61344</h3>
-                <i class="ti-layers-alt icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-              </div>  
-              <p class="mb-0 mt-2 text-success">23.00%<span class="text-black ml-1"><small>(30 days)</small></span></p>
+              <p class="card-title text-md-center text-xl-left">Total Pendapatan</p>
+            <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">
+                    Rp {{ number_format($totalPendapatan, 0, ',', '.') }}
+                </h3>
+                <i class="material-icons text-muted mb-0 mb-md-3 mb-xl-0"></i>
+            </div>
+            <p class="mb-0 mt-2 {{ $percentageChangePendapatan >= 0 ? 'text-success' : 'text-danger' }}">
+                {{ number_format($percentageChangePendapatan, 2) }}% 
+                <span class="text-black ml-1"><small>(30 days)</small></span>
+            </p>
             </div>
           </div>
         </div>
@@ -123,93 +136,67 @@
           </div>
         </div>
       </div>
-        
-          <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-              <div class="card position-relative">
-                <div class="card-body">
-                  <p class="card-title">Detailed Reports</p>
-                  <div class="row">
-                    <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-center">
-                      <div class="ml-xl-4">
-                        <h1>33500</h1>
-                        <h3 class="font-weight-light mb-xl-4">Sales</h3>
-                        <p class="text-muted mb-2 mb-xl-0">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
-                      </div>  
-                    </div>
-                    <div class="col-md-12 col-xl-9">
-                      <div class="row">
-                        <div class="col-md-6 mt-3 col-xl-5">
-                          <canvas id="north-america-chart"></canvas>
-                          <div id="north-america-legend"></div>
-                        </div>
-                        <div class="col-md-6 col-xl-7">
-                          <div class="table-responsive mb-3 mb-md-0">
-                            <table class="table table-borderless report-table">
-                              <tr>
-                                <td class="text-muted">Illinois</td>
-                                <td class="w-100 px-0">
-                                  <div class="progress progress-md mx-4">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td><h5 class="font-weight-bold mb-0">524</h5></td>
-                              </tr>
-                              <tr>
-                                <td class="text-muted">Washington</td>
-                                <td class="w-100 px-0">
-                                  <div class="progress progress-md mx-4">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td><h5 class="font-weight-bold mb-0">722</h5></td>
-                              </tr>
-                              <tr>
-                                <td class="text-muted">Mississippi</td>
-                                <td class="w-100 px-0">
-                                  <div class="progress progress-md mx-4">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td><h5 class="font-weight-bold mb-0">173</h5></td>
-                              </tr>
-                              <tr>
-                                <td class="text-muted">California</td>
-                                <td class="w-100 px-0">
-                                  <div class="progress progress-md mx-4">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td><h5 class="font-weight-bold mb-0">945</h5></td>
-                              </tr>
-                              <tr>
-                                <td class="text-muted">Maryland</td>
-                                <td class="w-100 px-0">
-                                  <div class="progress progress-md mx-4">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td><h5 class="font-weight-bold mb-0">553</h5></td>
-                              </tr>
-                              <tr>
-                                <td class="text-muted">Alaska</td>
-                                <td class="w-100 px-0">
-                                  <div class="progress progress-md mx-4">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                  </div>
-                                </td>
-                                <td><h5 class="font-weight-bold mb-0">912</h5></td>
-                              </tr>
-                            </table>
+
+      <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Data Reservasi Wisata</h4>
+              <p class="card-description">
+                Tabel daftar reservasi wisata 
+              </p>
+              <div class="table-responsive pt-3">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Nomor</th>
+                      <th>Nama Pelanggan</th>
+                      <th>Status</th>
+                      <th>Total Bayar</th>
+                      <th>Tanggal Reservasi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($reservasis as $index => $reservasi)
+                    <tr>
+                      <td>{{ $index + 1 }}</td>
+                      <td>{{ optional($reservasi->pelanggan->user)->name ?? '-' }}</td>
+
+                      <td>
+                        <div class="progress" style="height: 20px;">
+                          <div class="progress-bar 
+                            @if($reservasi->status_reservasi_wisata == 'pesan') bg-warning
+                            @elseif($reservasi->status_reservasi_wisata == 'dibayar') bg-info
+                            @elseif($reservasi->status_reservasi_wisata == 'selesai') bg-success
+                            @else bg-secondary
+                            @endif"
+                            role="progressbar"
+                            style="width: 
+                              @if($reservasi->status_reservasi_wisata == 'pesan') 30%
+                              @elseif($reservasi->status_reservasi_wisata == 'dibayar') 60%
+                              @elseif($reservasi->status_reservasi_wisata == 'selesai') 100%
+                              @else 10%
+                              @endif"
+                            aria-valuenow="70"
+                            aria-valuemin="0"
+                            aria-valuemax="100">
+                            {{ ucfirst($reservasi->status_reservasi_wisata) }}
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                      </td>
+                      <td>Rp {{ number_format($reservasi->total_bayar, 0, ',', '.') }}</td>
+                      <td>{{ $reservasi->created_at->format('d M Y') }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->

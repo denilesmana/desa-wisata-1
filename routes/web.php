@@ -26,7 +26,7 @@ Route::prefix('profile')->group(function() {
 
 //Reservasi
 Route::post('/reservasi', [App\Http\Controllers\ReservasiController::class, 'store'])->name('reservasi.store');
-
+Route::post('/reservasi/{id}/update-status', [App\Http\Controllers\ReservasiController::class, 'updateStatus'])->name('reservasi.update-status');
 
 //Berita
 Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog');
@@ -34,7 +34,10 @@ Route::get('/berita/{id}', [App\Http\Controllers\BlogController::class, 'show'])
 
 
 // Backend
-Route::resource('/dashboard', App\Http\Controllers\DashboardController::class);
+Route::middleware(['auth'])->group(function() {
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+});
+
 
 //User
 Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('users.index');
@@ -109,6 +112,8 @@ Route::delete('/paket_wisata/{paket_wisata}', [App\Http\Controllers\PaketWisataC
 
 //Reservasi
 Route::get('/reservasi', [App\Http\Controllers\ReservasiController::class, 'index'])->name('reservasi.index');
+
+
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');

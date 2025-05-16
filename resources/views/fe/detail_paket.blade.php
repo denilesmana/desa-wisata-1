@@ -3,32 +3,32 @@
     @include('layouts.navbar')
 
 <div class="site-section bg-light">
-  <div class="container">
+    <div class="container">
+        <a href="{{ route('home') }}" class="mb-3 d-inline-block"> &lt; Kembali</a>
         <div class="row">
             <div class="col-md-6">
-        <img id="mainImage" 
-            src="{{ asset('storage/' . $paket->foto1) }}" 
-            alt="Foto utama" 
-            class="img-fluid mb-4 rounded main-image" 
-            style="height: 350px; object-fit: cover; width: 100%;">
+                <img id="mainImage" 
+                    src="{{ asset('storage/' . $paket->foto1) }}" 
+                    alt="Foto utama" 
+                    class="img-fluid mb-4 rounded main-image" 
+                    style="height: 350px; object-fit: cover; width: 100%;">
 
-        <div class="gallery mb-5 d-flex flex-wrap" style="gap: 10px;">
-            @php
-            $fotoFields = ['foto1', 'foto2', 'foto3', 'foto4', 'foto5'];
-            @endphp
-            @foreach($fotoFields as $foto)
-            @if($paket->$foto)
-            <img src="{{ asset('storage/' . $paket->$foto) }}" 
-                alt="Thumbnail" 
-                onclick="changeMainImage(this)" 
-                class="thumb-image rounded" 
-                style="height: 60px; width: 100px; object-fit: cover; cursor: pointer;">
-            @endif
-            @endforeach
-        </div>
+            <div class="gallery mb-5 d-flex flex-wrap" style="gap: 10px;">
+                @php
+                $fotoFields = ['foto1', 'foto2', 'foto3', 'foto4', 'foto5'];
+                @endphp
+                @foreach($fotoFields as $foto)
+                @if($paket->$foto)
+                <img src="{{ asset('storage/' . $paket->$foto) }}" 
+                    alt="Thumbnail" 
+                    onclick="changeMainImage(this)" 
+                    class="thumb-image rounded" 
+                    style="height: 60px; width: 100px; object-fit: cover; cursor: pointer;">
+                @endif
+                @endforeach
+            </div>
         </div>
 
-      <!-- Kanan: Detail Paket -->
         <div class="col-md-5">
             <div class="p-4 mb-3 bg-white">
                 <h3 class="text-primary mb-2">{{ $paket->nama_paket }}</h3>

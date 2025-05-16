@@ -5,6 +5,7 @@
     
     <div class="site-section" data-aos="fade-up">
         <div class="container">
+            <a href="{{ route('home') }}" class="mb-3 d-inline-block"> &lt; Kembali</a>
             <div class="mb-5">
                 <img src="{{ asset('storage/' . $berita->foto) }}" alt="{{ $berita->judul }}" class="img-fluid rounded h-100">
             </div>
@@ -28,7 +29,6 @@
   <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
   <script src="{{ asset('frontend/js/bootstrap-datepicker.min.js') }}"></script>
   <script src="{{ asset('frontend/js/aos.js') }}"></script>
-
   <script src="{{ asset('frontend/js/main.js') }}"></script>
     
   </body>

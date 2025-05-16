@@ -21,18 +21,27 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-6 mb-5 mb-md-0">
-            <img src="{{ asset('frontend/images/hero_bg_2.jpg') }}" alt="Image" class="img-fluid rounded">
+            <img src="{{ asset('frontend/images/destinasi_1.jpg') }}" alt="Image" class="img-fluid rounded">
           </div>
           <div class="col-md-6 pl-md-5">
-            <h2 class="font-weight-light text-black mb-4">About Company</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae cumque eius modi expedita accusamus alias error totam ab magnam a mollitia magni, distinctio temporibus optio illo sapiente, odio unde natus.</p>
+            <h2 class="font-weight-light text-black mb-4">Tentang Kami</h2>
+            <p>StayDesa adalah platform desa wisata yang hadir untuk memperkenalkan keindahan alam, budaya lokal, serta kehidupan masyarakat pedesaan kepada wisatawan dengan cara yang autentik dan berkesan. Kami percaya bahwa setiap desa memiliki cerita, tradisi, dan pesona yang unik untuk dibagikan kepada dunia.</p>
 
             <ul class="list-unstyled">
-              <li class="d-flex align-items-center"><span class="icon-check2 text-primary h3 mr-2"></span><span>Vitae cumque eius modi expedita</span></li>
-              <li class="d-flex align-items-center"><span class="icon-check2 text-primary h3 mr-2"></span><span>Totam at maxime Accusantium</span></li>
-              <li class="d-flex align-items-center"><span class="icon-check2 text-primary h3 mr-2"></span><span>Distinctio temporibus</span></li>
-
+              <li class="mb-3">
+                <div class="d-flex align-items-start">
+                  <span class="icon-check2 text-primary h3 me-3"></span>
+                  <div>
+                    <ul style="list-style-type: disc; padding-left: 20px;">
+                      <li><strong>Pengalaman Wisata yang Autentik</strong></li>
+                      <li><strong>Pemberdayaan Masyarakat Lokal</strong></li>
+                      <li><strong>Wisata Berkelanjutan & Edukatif</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
             </ul>
+
           </div>
         </div>
       </div>
@@ -58,8 +67,8 @@
                   <img src="{{ asset('frontend/images/img_1.jpg') }}" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>James Martin</em>, <a href="#">Traveler</a></p>
+                  <p class="text-black lead">&ldquo;Menginap di desa wisata bersama Staydesa benar-benar membuka wawasan saya tentang kehidupan lokal. Interaksi dengan warga dan kegiatan sehari-hari seperti menanam padi hingga belajar membatik membuat pengalaman ini terasa sangat berharga.&rdquo;</p>
+                  <p class="">&mdash; <em>Andini Rahma</em>, <a href="#">Traveler</a></p>
                 </div>
               </div>
             </div>
@@ -72,8 +81,8 @@
                   <img src="{{ asset('frontend/images/img_2.jpg') }}" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>Clair Augustin</em>, <a href="#">Traveler</a></p>
+                  <p class="text-black lead">&ldquo;Saya sangat terkesan dengan komitmen Staydesa dalam memberdayakan masyarakat lokal. Setiap kegiatan wisata terasa hangat dan bermakna karena langsung melibatkan warga sekitar, bukan sekadar hiburan biasa.&rdquo;</p>
+                  <p class="">&mdash; <em>Michael Santoso</em>, <a href="#">Traveler</a></p>
                 </div>
               </div>
             </div>
@@ -86,12 +95,13 @@
                   <img src="{{ asset('frontend/images/img_4.jpg') }}" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>James Martin</em>, <a href="#">Traveler</a></p>
+                  <p class="text-black lead">&ldquo;Staydesa memberikan pengalaman wisata yang berbeda dan sangat edukatif. Anak-anak saya belajar banyak tentang alam, budaya, dan pentingnya menjaga lingkungan melalui kegiatan yang menyenangkan dan interaktif.&rdquo;</p>
+                  <p class="">&mdash; <em>Laras Wulandari</em>, <a href="#">Traveler</a></p>
                 </div>
               </div>
             </div>
           </div>
+
 
         </div>
       </div>

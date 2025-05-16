@@ -15,6 +15,11 @@ class ProfilController extends Controller
     public function index()
     {
         $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
         $pelanggan = $user->pelanggan ?: Pelanggan::create([
             'id_users' => $user->id,
             'nama_lengkap' => $user->name,
@@ -23,13 +28,13 @@ class ProfilController extends Controller
             'foto' => null
         ]);
 
-
         return view('ProfilPelanggan.index', [
             'title' => 'Profil Saya',
             'user' => $user,
             'pelanggan' => $pelanggan
         ]);
     }
+
 
 
     /**

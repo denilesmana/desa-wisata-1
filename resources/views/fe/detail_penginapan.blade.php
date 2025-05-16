@@ -1,8 +1,10 @@
 @extends('layouts.footer')
-@include('layouts.navbar')
+  @include('layouts.navbar')
 
 <div class="container mt-5">
+  <a href="{{ route('home') }}" class="mb-3 d-inline-block"> &lt; Kembali</a>
   <div class="row">
+    
     <div class="col-md-6">
       <img id="mainImage" 
            src="{{ asset('storage/' . $penginapan->foto1) }}" 
