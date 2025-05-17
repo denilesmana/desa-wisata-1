@@ -15,25 +15,25 @@ class WisataUserSeeder extends Seeder
     {
         $userdata = [
             [
-                'name' => 'Admin Staydesa',
-                'email' => 'admindesa@gmail.com',
+                'name' => 'adminstaydesa',
+                'email' => 'adminstaydesa@gmail.com',
                 'level' => 'admin',
                 'password' => bcrypt('12345678')
             ],
             [
-                'name' => 'Bendahara Staydesa',
+                'name' => 'bendahara',
                 'email' => 'bendahara@gmail.com',
                 'level' => 'bendahara',
                 'password' => bcrypt('12345678')
             ],
             [
-                'name' => 'karyawan Staydesa',
-                'email' => 'karyawan@gmail.com',
-                'level' => 'karyawan',
+                'name' => 'pelanggan',
+                'email' => 'pelanggan@gmail.com',
+                'level' => 'pelanggan',
                 'password' => bcrypt('12345678')
             ],
             [
-                'name' => 'Pemilik Staydesa',
+                'name' => 'pemilik',
                 'email' => 'pemilik@gmail.com',
                 'level' => 'pemilik',
                 'password' => bcrypt('12345678')

@@ -20,12 +20,15 @@ class ProfilController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
+        // Foto default
+        $defaultFoto = 'default-profile.jpg'; // atau path ke gambar default
+
         $pelanggan = $user->pelanggan ?: Pelanggan::create([
             'id_users' => $user->id,
             'nama_lengkap' => $user->name,
             'no_hp' => '081234567890',
             'alamat' => 'Alamat belum diisi',
-            'foto' => null
+            'foto' => $defaultFoto // Gunakan foto default
         ]);
 
         return view('ProfilPelanggan.index', [

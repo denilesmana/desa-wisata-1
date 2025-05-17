@@ -28,9 +28,7 @@ class DatabaseSeeder extends Seeder
        $adminUser = User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'no_hp' => '081234567890',
-            'alamat' => 'Jl. Admin No. 1',
-            'password' => Hash::make('admin_ganteng'),
+            'password' => Hash::make('12345678'),
             'level' => 'admin',
         ]);
 
@@ -40,8 +38,7 @@ class DatabaseSeeder extends Seeder
             'alamat' => 'Jl. Admin No. 1',
             'no_hp' => '081234567890',
             'jabatan' => 'administrasi',
-            'foto' => '',
-            'id_user' => $adminUser->id,
+            'id_users' => $adminUser->id,
         ]);
 
         // Create a Bendahara user
@@ -49,9 +46,7 @@ class DatabaseSeeder extends Seeder
         $bendaharaUser = User::create([
             'name' => 'Bendahara',
             'email' => 'bendahara@gmail.com',
-            'no_hp' => '081234567891',
-            'alamat' => 'Jl. Bendahara No. 2',
-            'password' => Hash::make('bendahara_ganteng'),
+            'password' => Hash::make('12345678'),
             'level' => 'bendahara',
         ]);
 
@@ -60,18 +55,15 @@ class DatabaseSeeder extends Seeder
             'alamat' => 'Jl. Bendahara No. 2',
             'no_hp' => '081234567891',
             'jabatan' => 'bendahara',
-            'foto' => '',
-            'id_user' => $bendaharaUser->id,
+            'id_users' => $bendaharaUser->id,
         ]);
 
         // Create an Owner user
         $ownerUser = User::create([
             'name' => 'Owner',
             'email' => 'owner@gmail.com',
-            'no_hp' => '081234567892',
-            'alamat' => 'Jl. Owner No. 3',
-            'password' => Hash::make('owner_ganteng'),
-            'level' => 'owner',
+            'password' => Hash::make('12345678'),
+            'level' => 'pemilik',
         ]);
         
         Karyawan::create([
@@ -79,17 +71,14 @@ class DatabaseSeeder extends Seeder
             'alamat' => 'Jl. Owner No. 3',
             'no_hp' => '081234567892',
             'jabatan' => 'pemilik',
-            'foto' => '',
-            'id_user' => $ownerUser->id,
+            'id_users' => $ownerUser->id,
         ]);
 
         // Create a Pelanggan user
         $pelangganUser = User::create([
             'name' => 'Pelanggan',
             'email' => 'pelanggan1@gmail.com',
-            'no_hp' => '081234567893',
-            'alamat' => 'Jl. Pelanggan No. 4',
-            'password' => Hash::make('pelanggan_ganteng'),
+            'password' => Hash::make('12345678'),
             'level' => 'pelanggan',
         ]);
 
@@ -99,7 +88,7 @@ class DatabaseSeeder extends Seeder
             'no_hp' => '081234567893',
             'alamat' => 'Jl. Pelanggan No. 4',
             'foto' => '',
-            'id_user' => $pelangganUser->id,
+            'id_users' => $pelangganUser->id,
         ]);
     }
 }

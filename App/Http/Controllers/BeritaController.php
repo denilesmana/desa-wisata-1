@@ -15,7 +15,7 @@ class BeritaController extends Controller
     public function index()
     {
         $berita = Berita::with('kategori_berita')->paginate(10);
-        return view('Berita.index', compact('berita'), [
+        return view('berita.index', compact('berita'), [
         'title' => 'Berita'
     ]);
     }
@@ -27,7 +27,7 @@ class BeritaController extends Controller
     {
         $kategori_berita = KategoriBerita::all();
 
-        return view('Berita.create', compact('kategori_berita'), [
+        return view('berita.create', compact('kategori_berita'), [
             'title' => 'Tambah Berita',
             'kategori_berita' => $kategori_berita,
     ]);
@@ -73,7 +73,7 @@ class BeritaController extends Controller
         $berita = Berita::findOrFail($id);
         $kategori_berita = KategoriBerita::all();
 
-        return view('Berita.edit', compact('berita', 'kategori_berita'), [
+        return view('berita.edit', compact('berita', 'kategori_berita'), [
             'title' => 'Edit Berita',
         ]);
     }

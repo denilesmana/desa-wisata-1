@@ -11,6 +11,7 @@ class Reservasi extends Model
         'id_pelanggan',
         'id_paket_wisata',
         'tgl_reservasi_wisata',
+        'tgl_selesai_reservasi',
         'harga',
         'jumlah_peserta',
         'diskon',

@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\PaketWisata;
 use App\Models\Pelanggan;
 use Illuminate\Support\Facades\DB;
+use App\Models\DiskonPaket;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+
 
 class ReservasiController extends Controller
 {
@@ -40,6 +44,7 @@ class ReservasiController extends Controller
         return response()->json(['success' => true]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -53,51 +58,79 @@ class ReservasiController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
             'id_paket_wisata' => 'required|exists:paket_wisata,id',
-            'tgl_reservasi_wisata' => 'required|date',
+            'tgl_reservasi_wisata' => 'required|date|after_or_equal:today',
+            'tgl_selesai_reservasi' => 'required|date|after_or_equal:tgl_reservasi_wisata',
             'jumlah_peserta' => 'required|integer|min:1',
             'file_bukti_tf' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'diskon' => 'nullable|numeric|min:0|max:100'
         ]);
 
-        // Dapatkan data pelanggan dari user yang login
         $user = Auth::user();
         $pelanggan = Pelanggan::where('id_users', $user->id)->firstOrFail();
-
-        // Dapatkan data paket wisata
         $paketWisata = PaketWisata::findOrFail($request->id_paket_wisata);
 
-        // Hitung subtotal, diskon, dan total bayar
+        // Validasi ketersediaan tanggal dengan range yang dipilih user
+        $existingReservasi = Reservasi::where('id_paket_wisata', $request->id_paket_wisata)
+            ->where(function($query) use ($request) {
+                $query->whereBetween('tgl_reservasi_wisata', [$request->tgl_reservasi_wisata, $request->tgl_selesai_reservasi])
+                    ->orWhereBetween('tgl_selesai_reservasi', [$request->tgl_reservasi_wisata, $request->tgl_selesai_reservasi])
+                    ->orWhere(function($q) use ($request) {
+                        $q->where('tgl_reservasi_wisata', '<=', $request->tgl_reservasi_wisata)
+                            ->where('tgl_selesai_reservasi', '>=', $request->tgl_selesai_reservasi);
+                    });
+            })
+            ->exists();
+
+        if ($existingReservasi) {
+            return back()->withErrors([
+                'tgl_reservasi_wisata' => 'Tanggal tersebut sudah dipesan. Silakan pilih tanggal lain.'
+            ])->withInput();
+        }
+
+        // Hitung durasi berdasarkan input pengguna
+        $tglMulai = new \DateTime($request->tgl_reservasi_wisata);
+        $tglSelesai = new \DateTime($request->tgl_selesai_reservasi);
+        $durasi = $tglMulai->diff($tglSelesai)->days + 1; // +1 untuk menghitung inklusif
+
+        // Hitung harga dan diskon
+        $today = now()->format('Y-m-d');
+        $diskonPaket = DiskonPaket::where('id_paket', $paketWisata->id)
+            ->where('aktif', 1)
+            ->where(function($q) use ($today) {
+                $q->whereNull('tgl_mulai')->orWhere('tgl_mulai', '<=', $today);
+            })
+            ->where(function($q) use ($today) {
+                $q->whereNull('tgl_akhir')->orWhere('tgl_akhir', '>=', $today);
+            })
+            ->first();
+
         $harga = $paketWisata->harga_per_pack;
         $jumlahPeserta = $request->jumlah_peserta;
-
-        // Diskon 5% per peserta
-        $diskonPersen = 5 * $jumlahPeserta; // 5% per peserta, sesuaikan dengan jumlah peserta
-        if ($diskonPersen > 100) {
-            $diskonPersen = 100; // Tidak boleh lebih dari 100%
-        }
-        
         $subtotal = $harga * $jumlahPeserta;
+
+        $diskonPersen = $diskonPaket ? $diskonPaket->diskon : 0;
         $nilaiDiskon = ($subtotal * $diskonPersen) / 100;
         $totalBayar = $subtotal - $nilaiDiskon;
 
-        // Simpan file bukti transfer
+        // Simpan bukti transfer
         $filePath = $request->file('file_bukti_tf')->store('bukti_transfer', 'public');
 
-        // Buat reservasi baru
+        // Buat reservasi
         $reservasi = Reservasi::create([
             'id_pelanggan' => $pelanggan->id,
             'id_paket_wisata' => $paketWisata->id,
             'tgl_reservasi_wisata' => $request->tgl_reservasi_wisata,
+            'tgl_selesai_reservasi' => $request->tgl_selesai_reservasi,
+            'durasi' => $durasi,
             'harga' => $harga,
             'jumlah_peserta' => $jumlahPeserta,
             'diskon' => $diskonPersen,
             'nilai_diskon' => $nilaiDiskon,
             'total_bayar' => $totalBayar,
             'file_bukti_tf' => $filePath,
-            'status_reservasi_wisata' => 'pesan'
+            'status_reservasi_wisata' => 'pesan',
+            'id_diskon_paket' => $diskonPaket ? $diskonPaket->id : null 
         ]);
 
         return redirect()->route('paket_wisata.show', $paketWisata->id)
@@ -105,57 +138,84 @@ class ReservasiController extends Controller
     }
 
 
+    
     public function calculate(Request $request)
     {
-        // Endpoint untuk kalkulasi real-time (AJAX)
         $request->validate([
             'id_paket_wisata' => 'required|exists:paket_wisata,id',
             'jumlah_peserta' => 'required|integer|min:1',
-            'diskon' => 'nullable|numeric|min:0|max:100'
+            'tgl_reservasi_wisata' => 'sometimes|date'
         ]);
 
         $paketWisata = PaketWisata::findOrFail($request->id_paket_wisata);
-        
+
+        // Cari diskon aktif berdasarkan tanggal hari ini
+        $today = now()->format('Y-m-d');
+        $diskonPaket = DiskonPaket::where('id_paket', $paketWisata->id)
+            ->where('aktif', 1)
+            ->where(function($q) use ($today) {
+                $q->whereNull('tgl_mulai')->orWhere('tgl_mulai', '<=', $today);
+            })
+            ->where(function($q) use ($today) {
+                $q->whereNull('tgl_akhir')->orWhere('tgl_akhir', '>=', $today);
+            })
+            ->first();
+
+        // Hitung subtotal
         $harga = $paketWisata->harga_per_pack;
         $jumlahPeserta = $request->jumlah_peserta;
-
-        // Diskon 5% per peserta
-        $diskonPersen = 5 * $jumlahPeserta;
-        if ($diskonPersen > 100) {
-            $diskonPersen = 100;
-        }
-        
         $subtotal = $harga * $jumlahPeserta;
+
+        // Hitung diskon dan total bayar
+        $diskonPersen = $diskonPaket ? $diskonPaket->diskon : 0;
         $nilaiDiskon = ($subtotal * $diskonPersen) / 100;
         $totalBayar = $subtotal - $nilaiDiskon;
+
+        // Hitung tanggal selesai jika tanggal reservasi diberikan
+        $tglSelesai = null;
+        if ($request->tgl_reservasi_wisata) {
+            $tglSelesai = Carbon::parse($request->tgl_reservasi_wisata)
+                ->addDays($paketWisata->durasi ?? 1)
+                ->format('Y-m-d');
+        }
 
         return response()->json([
             'harga' => $harga,
             'subtotal' => $subtotal,
+            'diskon_persen' => $diskonPersen,
             'nilai_diskon' => $nilaiDiskon,
             'total_bayar' => $totalBayar,
+            'durasi' => $paketWisata->durasi ?? 1,
+            'tgl_selesai' => $tglSelesai,
             'formatted' => [
                 'harga' => 'Rp ' . number_format($harga, 0, ',', '.'),
                 'subtotal' => 'Rp ' . number_format($subtotal, 0, ',', '.'),
+                'diskon_persen' => $diskonPersen . '%',
                 'nilai_diskon' => 'Rp ' . number_format($nilaiDiskon, 0, ',', '.'),
-                'total_bayar' => 'Rp ' . number_format($totalBayar, 0, ',', '.')
+                'total_bayar' => 'Rp ' . number_format($totalBayar, 0, ',', '.'),
+                'tgl_selesai' => $tglSelesai ? Carbon::parse($tglSelesai)->format('d F Y') : null
             ]
         ]);
     }
 
-    
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+
+    public function generateStruk($id)
     {
-        //
+        $reservasi = Reservasi::with(['pelanggan.user', 'paketWisata'])->findOrFail($id);
+        
+        // Verifikasi bahwa user yang mengakses adalah pemilik reservasi atau admin
+        if (Auth::user()->role !== 'admin' && Auth::id() !== $reservasi->pelanggan->id_users) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $pdf = PDF::loadView('reservasi.struk', compact('reservasi'));
+        
+        return $pdf->download('struk-reservasi-' . $reservasi->id . '.pdf');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(string $id)
     {
         //

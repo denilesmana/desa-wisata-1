@@ -1,9 +1,6 @@
-@extends('layouts.be-navbar')
+@extends('layouts.master')
 
-@include('layouts.sidebar')
-
-<div class="main-panel">
-  <div class="content-wrapper">
+@section('content')
     <div class="row">
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -19,7 +16,8 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>Paket Wisata</th>
-                    <th>Tanggal Reservasi</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Tanggal Selesai</th>
                     <th>Harga</th>
                     <th>Jumlah</th>
                     <th>Diskon</th>
@@ -36,6 +34,7 @@
                       <td>{{ $item->pelanggan->user->name ?? '-' }}</td>
                       <td>{{ $item->paketWisata->nama_paket ?? '-' }}</td>
                       <td>{{ $item->tgl_reservasi_wisata }}</td>
+                        <td>{{ $item->tgl_selesai_reservasi }}</td>
                       <td>Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
                       <td>{{ $item->jumlah_peserta }}</td>
                       <td>{{ $item->diskon }}%</td>
@@ -68,33 +67,16 @@
                                 @endforeach
                             </select>
                       </td>
-
-
                   </tr>
                   @endforeach
                 </tbody>
-
-                
-                
               </table>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- content-wrapper ends -->
-    <footer class="footer">
-      <div class="d-sm-flex justify-content-center justify-content-sm-between">
-        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
-          Copyright © 2018 <a href="https://www.templatewatch.com/" target="_blank">Templatewatch</a>. All rights reserved.
-        </span>
-        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
-          Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i>
-        </span>
-      </div>
-    </footer>
-  </div>
-</div>
+@endsection
 </body>
 </html>
 

@@ -14,7 +14,6 @@ Route::resource('/booking', App\Http\Controllers\BookingController::class);
 //Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/kategori/{id}/obyek-wisata', [App\Http\Controllers\HomeController::class, 'obyekWisataByKategori'])->name('kategori.obyek_wisata');
-Route::get('/penginapan/{id}', [\App\Http\Controllers\HomeController::class, 'showPenginapan'])->name('penginapan.show');
 Route::get('/paket/{id}', [App\Http\Controllers\HomeController::class, 'showPaket'])->name('paket_wisata.show');
 
 // Profile 
@@ -30,13 +29,16 @@ Route::post('/reservasi/{id}/update-status', [App\Http\Controllers\ReservasiCont
 
 //Berita
 Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog');
-Route::get('/berita/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('berita.show');
+// Route::get('/berita/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('berita.show');
 
 
 // Backend
 Route::middleware(['auth'])->group(function() {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 });
+
+
+Route::get('/dashboard/report', [App\Http\Controllers\DashboardController::class, 'downloadPDF'])->name('dashboard.report');
 
 
 //User
@@ -68,6 +70,7 @@ Route::post('/berita', [App\Http\Controllers\BeritaController::class, 'store'])-
 Route::get('/berita/{id}/edit', [App\Http\Controllers\BeritaController::class, 'edit'])->name('berita.edit');
 Route::put('/berita/{id}', [App\Http\Controllers\BeritaController::class, 'update'])->name('berita.update');
 Route::delete('/berita/{id}', [App\Http\Controllers\BeritaController::class, 'destroy'])->name('berita.destroy');
+Route::get('/berita/{id}', [App\Http\Controllers\BlogController::class, 'show'])->name('berita.show');
 
 //Kategori Berita
 Route::get('/kategori_berita', [App\Http\Controllers\KategoriBeritaController::class, 'index'])->name('kategori_berita.index');
@@ -101,6 +104,7 @@ Route::post('/penginapan', [App\Http\Controllers\PenginapanController::class, 's
 Route::get('/penginapan/{penginapan}/edit', [App\Http\Controllers\PenginapanController::class, 'edit'])->name('penginapan.edit');
 Route::put('/penginapan/{penginapan}', [App\Http\Controllers\PenginapanController::class, 'update'])->name('penginapan.update');
 Route::delete('/penginapan/{penginapan}', [App\Http\Controllers\PenginapanController::class, 'destroy'])->name('penginapan.destroy');
+Route::get('/penginapan/{id}', [\App\Http\Controllers\HomeController::class, 'showPenginapan'])->name('penginapan.show');
 
 //Paket Wisata
 Route::get('/paket_wisata', [App\Http\Controllers\PaketWisataController::class, 'index'])->name('paket_wisata.index');
@@ -110,8 +114,20 @@ Route::get('/paket_wisata/{paket_wisata}/edit', [App\Http\Controllers\PaketWisat
 Route::put('/paket_wisata/{paket_wisata}', [App\Http\Controllers\PaketWisataController::class, 'update'])->name('paket_wisata.update');
 Route::delete('/paket_wisata/{paket_wisata}', [App\Http\Controllers\PaketWisataController::class, 'destroy'])->name('paket_wisata.destroy');
 
+//Diskon
+Route::get('/diskon', [App\Http\Controllers\DiskonController::class, 'index'])->name('diskon.index');
+Route::post('/diskon/update-all', [App\Http\Controllers\DiskonController::class, 'updateAll'])->name('diskon.updateAll');
+
 //Reservasi
 Route::get('/reservasi', [App\Http\Controllers\ReservasiController::class, 'index'])->name('reservasi.index');
+
+Route::get('/paket-wisata/{id}', [App\Http\Controllers\PaketWisataController::class, 'show'])
+     ->name('paket_wisata.show');
+
+// Route untuk generate struk
+Route::get('/reservasi/struk/{id}', [App\Http\Controllers\ReservasiController::class, 'generateStruk'])
+     ->name('reservasi.struk')
+     ->middleware('auth');
 
 
 
@@ -126,6 +142,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/admin/pemilik', [App\Http\Controllers\DashboardController::class, 'pemilik'])->middleware('UserAccess:pemilik');
     Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 });
+
+
 
 
 Route::middleware(['auth'])->group(function() {

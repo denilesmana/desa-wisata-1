@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('id_pelanggan')->constrained('pelanggan')->onDelete('cascade');
             $table->foreignId('id_paket_wisata')->constrained('paket_wisata')->onDelete('cascade');
             $table->dateTime('tgl_reservasi_wisata');
+            $table->dateTime('tgl_selesai_reservasi');
             $table->integer('harga');
             $table->integer('jumlah_peserta');
             $table->decimal('diskon', 10, 0);

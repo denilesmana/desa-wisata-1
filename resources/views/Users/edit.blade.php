@@ -1,10 +1,6 @@
-@extends('layouts.be-navbar')
+@extends('layouts.master')
 
-@include('layouts.sidebar')
-
-
-<div class="main-panel">        
-  <div class="content-wrapper">
+@section('content')
     <div class="row">
       <div class="col-12 grid-margin stretch-card">
           <div class="card">
@@ -51,6 +47,7 @@
           </div>
         </div>
       </div>
+    </div>
 </div>
 </div>
-</div>
+@endsection

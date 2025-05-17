@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\PaketWisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Reservasi;
+use Illuminate\Support\Facades\Auth;
 
 class PaketWisataController extends Controller
 {
@@ -66,9 +69,25 @@ class PaketWisataController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $paket = PaketWisata::findOrFail($id);
+        
+        // Cari reservasi jika user sudah login
+        $reservasi = null;
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->pelanggan) { // Pastikan user memiliki relasi pelanggan
+                $reservasi = Reservasi::where('id_paket_wisata', $id)
+                            ->where('id_pelanggan', $user->pelanggan->id)
+                            ->latest()
+                            ->first();
+            }
+        }
+        
+        return view('fe.detail_paket', compact('paket', 'reservasi'), [
+            'title' => 'Detail Paket Wisata'
+        ]);
     }
 
     /**

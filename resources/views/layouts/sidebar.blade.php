@@ -18,6 +18,13 @@
             </a>
           </li>
 
+          <li class="nav-item {{ Request::is('diskon') ? 'active' : '' }}">
+            <a class="nav-link" href="/diskon">  
+              <i class="ti-tag menu-icon"></i>
+              <span class="menu-title">Diskon</span>
+            </a>
+          </li>
+
           <li class="nav-item {{ Request::is('penginapan') ? 'active' : '' }}">
             <a class="nav-link" href="/penginapan">  
               <i class="ti-home menu-icon"></i> 
@@ -100,30 +107,4 @@
           </li>
         </ul>
       </nav>
-    <!-- partial -->
-
-
-    <script src="{{ asset('backend/../../vendors/base/vendor.bundle.base.js') }}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page-->
-    <!-- End plugin js for this page-->
-    <!-- inject:js -->
-    <script src="{{ asset('backend/../../js/off-canvas.js') }}"></script>
-    <script src="{{ asset('backend/../../js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('backend/../../js/template.js') }}"></script>
-    <script src="{{ asset('backend/../../js/todolist.js') }}"></script>
-    <script src="{{ asset('backend/vendors/base/vendor.bundle.base.js') }}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page-->
-    <script src="{{ asset('backend/vendors/chart.js/Chart.min.js') }}"></script>
-    <!-- End plugin js for this page-->
-    <!-- inject:js -->
-    <script src="{{ asset('backend/js/off-canvas.js') }}"></script>
-    <script src="{{ asset('backend/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('backend/js/template.js') }}"></script>
-    <script src="{{ asset('backend/js/todolist.js') }}"></script>
-    <script src="{{ asset('backend/path-to-your-template/js/file-upload.js') }}"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page-->
-    <script src="{{ asset('backend/js/dashboard.js') }}"></script>
   

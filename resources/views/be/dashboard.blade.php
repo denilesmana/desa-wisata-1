@@ -1,22 +1,19 @@
-@extends('layouts.be-navbar')
+@extends('layouts.master')
 
-@include('layouts.sidebar')
-
-<div class="main-panel">
-    <div class="content-wrapper">
+@section('content')
       <div class="row">
-        <div class="col-md-12 grid-margin">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <h4 class="font-weight-bold mb-0">Welcome Back, {{ auth()->user()->name }}</h4>
-            </div>
-            <div>
-                <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                  <i class="ti-clipboard btn-icon-prepend"></i>Report
-                </button>
-            </div>
+          <div class="col-md-12 grid-margin">
+              <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                      <h4 class="font-weight-bold mb-0">Welcome Back, {{ auth()->user()->name }}</h4>
+                  </div>
+                  <div>
+                      <a href="{{ route('dashboard.report') }}" class="btn btn-primary btn-icon-text btn-rounded" target="_blank">
+                          <i class="ti-clipboard btn-icon-prepend"></i> Report
+                      </a>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
       <div class="row">
         <div class="col-md-3 grid-margin stretch-card">
@@ -81,7 +78,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      {{-- <div class="row">
         <div class="col-md-6 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
@@ -135,7 +132,7 @@
             <canvas id="order-chart" class="w-100"></canvas>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
@@ -195,23 +192,8 @@
           </div>
         </div>
       </div>
-
-
-        </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.templatewatch.com/" target="_blank">Templatewatch</a>. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-          </div>
-        </footer>
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
 </body>
 
 </html>
+
+@endsection

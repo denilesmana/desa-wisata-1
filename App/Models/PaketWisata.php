@@ -18,4 +18,16 @@ class PaketWisata extends Model
         'foto4',
         'foto5',
     ];
+
+    public function reservasi()
+    {
+        return $this->hasMany(Reservasi::class, 'id_paket');
+    }
+
+    public function reservasiAktif()
+    {
+        return $this->hasMany(Reservasi::class, 'id_paket')
+            ->whereNotIn('status_reservasi_wisata', ['ditolak', 'selesai']);
+    }
+
 }
