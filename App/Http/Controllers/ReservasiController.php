@@ -70,8 +70,9 @@ class ReservasiController extends Controller
         $pelanggan = Pelanggan::where('id_users', $user->id)->firstOrFail();
         $paketWisata = PaketWisata::findOrFail($request->id_paket_wisata);
 
-        // Validasi ketersediaan tanggal dengan range yang dipilih user
+        // Validasi ketersediaan tanggal hanya untuk pelanggan yang sama
         $existingReservasi = Reservasi::where('id_paket_wisata', $request->id_paket_wisata)
+            ->where('id_pelanggan', $pelanggan->id) // Hanya cek untuk pelanggan ini saja
             ->where(function($query) use ($request) {
                 $query->whereBetween('tgl_reservasi_wisata', [$request->tgl_reservasi_wisata, $request->tgl_selesai_reservasi])
                     ->orWhereBetween('tgl_selesai_reservasi', [$request->tgl_reservasi_wisata, $request->tgl_selesai_reservasi])
@@ -84,7 +85,7 @@ class ReservasiController extends Controller
 
         if ($existingReservasi) {
             return back()->withErrors([
-                'tgl_reservasi_wisata' => 'Tanggal tersebut sudah dipesan. Silakan pilih tanggal lain.'
+                'tgl_reservasi_wisata' => 'Anda sudah memiliki reservasi pada tanggal tersebut. Silakan pilih tanggal lain.'
             ])->withInput();
         }
 
@@ -133,8 +134,7 @@ class ReservasiController extends Controller
             'id_diskon_paket' => $diskonPaket ? $diskonPaket->id : null 
         ]);
 
-        return redirect()->route('paket_wisata.show', $paketWisata->id)
-            ->with('success', 'Reservasi berhasil dibuat! Total yang harus dibayar: Rp ' . number_format($totalBayar, 0, ',', '.'));
+        return redirect()->route('paket_wisata.show', $paketWisata->id)->with('success', 'Reservasi berhasil dibuat! Total yang harus dibayar: Rp ' . number_format($totalBayar, 0, ',', '.'));
     }
 
 
@@ -211,7 +211,6 @@ class ReservasiController extends Controller
         }
 
         $pdf = PDF::loadView('reservasi.struk', compact('reservasi'));
-        
         return $pdf->download('struk-reservasi-' . $reservasi->id . '.pdf');
     }
 
