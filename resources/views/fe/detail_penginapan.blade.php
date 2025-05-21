@@ -1,5 +1,5 @@
-@extends('layouts.footer')
-  @include('layouts.navbar')
+@extends('layouts.master-fe')
+  @section('content')
 
 <div class="container mt-5">
   <a href="{{ route('home') }}" class="mb-3 d-inline-block"> &lt; Kembali</a>

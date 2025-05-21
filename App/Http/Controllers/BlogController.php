@@ -14,7 +14,7 @@ class BlogController extends Controller
     {
         $berita = Berita::with('kategori_berita')->latest()->paginate(6);
         return view('fe.blog', compact('berita'), [
-            'title' => 'Blog',
+            'title' => 'Berita',
         ]);
     }
 

@@ -1,6 +1,6 @@
-@extends('layouts.footer')
+@extends('layouts.master-fe')
 
-    @include('layouts.navbar')
+    @section('content')
 
     <div class="site-section py-5">
       <div class="container">

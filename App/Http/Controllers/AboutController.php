@@ -12,7 +12,7 @@ class AboutController extends Controller
     public function index()
     {
         return view('fe.about', [
-            'title' => 'About'
+            'title' => 'Tentang Kami'
         ]);
     }
 

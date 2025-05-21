@@ -21,7 +21,7 @@ class HomeController extends Controller
         $paket_wisata = PaketWisata::all();
         $berita = Berita::all();
         return view('fe.home', [
-            'title' => 'Home',
+            'title' => 'Beranda',
             'kategori_wisata' => $kategori_wisata,
             'penginapan' => $penginapan,
             'paket_wisata' => $paket_wisata,

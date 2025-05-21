@@ -1,6 +1,6 @@
-@extends('layouts.footer')
+@extends('layouts.master-fe')
 
-    @include('layouts.navbar')
+    @section('content')
 
 
     <div class="site-blocks-cover inner-page-cover" style="background-image: url(frontend/images/desa2.png);" data-aos="fade" data-stellar-background-ratio="0.5">
@@ -8,8 +8,8 @@
           <div class="row align-items-center justify-content-center text-center">
 
             <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
-              <h1 class="text-white font-weight-bold">Destinations</h1>
-              <div><a href="home">Home</a> <span class="mx-2 text-white">&bullet;</span> <span class="text-white">Destinations</span></div>
+              <h1 class="text-white font-weight-bold">Destinasi</h1>
+              <div><a href="home">Beranda</a> <span class="mx-2 text-white">&bullet;</span> <span class="text-white">Destinasi</span></div>
               
             </div>
           </div>
@@ -73,20 +73,7 @@
       </div>
     </div>
   </div>
-
-  <script src="/frontend/js/jquery-3.3.1.min.js"></script>
-  <script src="/frontend/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/frontend/js/jquery-ui.js"></script>
-  <script src="/frontend/js/popper.min.js"></script>
-  <script src="/frontend/js/bootstrap.min.js"></script>
-  <script src="/frontend/js/owl.carousel.min.js"></script>
-  <script src="/frontend/js/jquery.stellar.min.js"></script>
-  <script src="/frontend/js/jquery.countdown.min.js"></script>
-  <script src="/frontend/js/jquery.magnific-popup.min.js"></script>
-  <script src="/frontend/js/bootstrap-datepicker.min.js"></script>
-  <script src="/frontend/js/aos.js"></script>
-
-  <script src="/frontend/js/main.js"></script>
+  @endsection
     
   </body>
 </html>

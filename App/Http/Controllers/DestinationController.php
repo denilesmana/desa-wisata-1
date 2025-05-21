@@ -16,7 +16,7 @@ class DestinationController extends Controller
         $paket_wisata = PaketWisata::all();
         $kategori_wisata = KategoriWisata::all();
         return view('fe.destination', [
-            'title' => 'Destination',
+            'title' => 'Destinasi',
             'paket_wisata' => $paket_wisata,
             'kategori_wisata' => $kategori_wisata,
         ]);

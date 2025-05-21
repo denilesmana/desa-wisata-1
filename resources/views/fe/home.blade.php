@@ -1,10 +1,7 @@
-@extends('layouts.footer')
+@extends('layouts.master-fe')
     
-    @include('layouts.navbar')
 
-  
-
-   
+    @section('content')
 
     <div class="slide-one-item home-slider owl-carousel">
       <div class="site-blocks-cover overlay" style="background-image: url(/frontend/images/desa2.png);" data-aos="fade" data-stellar-background-ratio="0.5">
@@ -152,8 +149,8 @@
                   </div>
               @endforeach
           </div>
-      @else
-          <div class="alert alert-warning text-center">Tidak ada data penginapan tersedia</div>
+      {{-- @else
+          <div class="alert alert-warning text-center">Tidak ada data penginapan tersedia</div> --}}
       @endif
     </div>
 
@@ -163,30 +160,14 @@
       <div class="container">
         <div class="row text-center">
           <div class="col-md-12">
-            <h2 class="mb-5 text-black">Want To Travel With Us?</h2>
-            <p class="mb-0"><a href="booking.html" class="btn btn-primary py-3 px-5 text-white">Book Now</a></p>
+            <h2 class="mb-5 text-black">Yuk, Jelajahi Dunia Bersama Kami!</h2>
+            <p class="mb-0"><a href="booking.html" class="btn btn-primary py-3 px-5 text-white">Reservasi Sekarang!~</a></p>
           </div>
         </div>
       </div>
     </div>
-
-    {{-- @section() --}}
-    
   </div>
-
-  <script src="/frontend/js/jquery-3.3.1.min.js"></script>
-  <script src="/frontend/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/frontend/js/jquery-ui.js"></script>
-  <script src="/frontend/js/popper.min.js"></script>
-  <script src="/frontend/js/bootstrap.min.js"></script>
-  <script src="/frontend/js/owl.carousel.min.js"></script>
-  <script src="/frontend/js/jquery.stellar.min.js"></script>
-  <script src="/frontend/js/jquery.countdown.min.js"></script>
-  <script src="/frontend/js/jquery.magnific-popup.min.js"></script>
-  <script src="/frontend/js/bootstrap-datepicker.min.js"></script>
-  <script src="/frontend/js/aos.js"></script>
-  <script src="/frontend/js/main.js"></script>
-  <script>
+  @endsection
   <script>
     document.querySelectorAll('.scroll-to-paket').forEach(link => {
       link.addEventListener('click', function(e) {

@@ -5,11 +5,14 @@ use Illuminate\Support\Facades\Route;
 
 // Frontend
 
-Route::resource('/', App\Http\Controllers\HomeController::class);
-Route::resource('/destination', App\Http\Controllers\DestinationController::class);
-Route::resource('/about', App\Http\Controllers\AboutController::class);
-Route::resource('/contact', App\Http\Controllers\ContactController::class);
-Route::resource('/booking', App\Http\Controllers\BookingController::class);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/destination', [App\Http\Controllers\DestinationController::class, 'index'])->name('destination');
+Route::get('about', [App\Http\Controllers\AboutController::class, 'index'])->name('about');
+// Route::get('/blog', [App\Http\Controllers\ContactController::class, 'index']);
+// Route::resource('/destination', App\Http\Controllers\DestinationController::class);
+// Route::resource('/about', App\Http\Controllers\AboutController::class);
+// Route::resource('/contact', App\Http\Controllers\ContactController::class);
+// Route::resource('/booking', App\Http\Controllers\BookingController::class);
 
 //Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

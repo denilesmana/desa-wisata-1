@@ -1,6 +1,6 @@
-@extends('layouts.footer')
+@extends('layouts.master-fe')
     
-    @include('layouts.navbar')
+    @section('content')
 
     <div class="container py-5">
     <div class="row justify-content-center">
