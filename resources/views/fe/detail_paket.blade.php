@@ -72,9 +72,15 @@
 
                 <div class="mt-4">
                     <div class="d-flex justify-content-center flex-wrap" style="gap: 15px;">
-                        <a href="#" class="btn btn-primary text-white px-4 py-2" data-bs-toggle="modal" data-bs-target="#reservasiModal">
-                            Reservasi Sekarang
-                        </a>
+                        @auth
+                            <a href="#" class="btn btn-primary text-white px-4 py-2" data-bs-toggle="modal" data-bs-target="#reservasiModal">
+                                Reservasi Sekarang
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-primary text-white px-4 py-2">
+                                Reservasi Sekarang
+                            </a>
+                        @endauth
                                 
                         @if(isset($reservasi) && $reservasi)
                             <a href="{{ route('reservasi.struk', $reservasi->id) }}" class="btn btn-primary text-white px-4 py-2">

@@ -16,129 +16,102 @@ class DashboardController extends Controller
      */
 
 
-    public function index()
+    private function getDashboardData($title = 'Dashboard')
     {
+        $now = now();
+        $lastMonth = $now->copy()->subDays(30);
+        $twoMonthsAgo = $now->copy()->subDays(60);
+
+        // Reservasi data
         $totalReservasi = Reservasi::count();
         $reservasis = Reservasi::with('user')->latest()->get();
-        $statusCounts = Reservasi::selectRaw('status_reservasi_wisata, COUNT(*) as total')
-            ->groupBy('status_reservasi_wisata')
+        $statusCounts = Reservasi::groupBy('status_reservasi_wisata')
+            ->selectRaw('status_reservasi_wisata, COUNT(*) as total')
             ->pluck('total', 'status_reservasi_wisata')
             ->toArray();
 
-        $now = now();
-        $lastMonth = $now->copy()->subDays(30);
-        $currentCount = Reservasi::where('created_at', '>=', $lastMonth)->count();
-        $previousCount = Reservasi::where('created_at', '<', $lastMonth)
-                                  ->where('created_at', '>=', $lastMonth->copy()->subDays(30))
-                                  ->count();
+        // Reservasi percentage change
+        $currentReservasiCount = Reservasi::where('created_at', '>=', $lastMonth)->count();
+        $previousReservasiCount = Reservasi::whereBetween('created_at', [$twoMonthsAgo, $lastMonth])->count();
+        $percentageChange = $this->calculatePercentageChange($currentReservasiCount, $previousReservasiCount);
 
-        $percentageChange = 0;
-        if ($previousCount > 0) {
-            $percentageChange = (($currentCount - $previousCount) / $previousCount) * 100;
-        }
+        // Users data
+        $totalUsers = User::count();
+        $currentUsersCount = User::where('created_at', '>=', $lastMonth)->count();
+        $previousUsersCount = User::whereBetween('created_at', [$twoMonthsAgo, $lastMonth])->count();
+        $percentageChangeUsers = $this->calculatePercentageChange($currentUsersCount, $previousUsersCount);
 
-        $totalUsers = User::count(); 
-        $totalUsersLast30Days = User::where('created_at', '>=', now()->subDays(30))->count();
-        $totalUsersPrevious30Days = User::whereBetween('created_at', [now()->subDays(60), now()->subDays(30)])->count();
-        $percentageChangeUsers = $totalUsersPrevious30Days > 0 ? (($totalUsersLast30Days - $totalUsersPrevious30Days) / $totalUsersPrevious30Days) * 100 : 0;
-
+        // Paket Wisata data
         $totalPaketWisata = PaketWisata::count();
-        $totalPaketLast30Days = PaketWisata::where('created_at', '>=', now()->subDays(30))->count();
-        $totalPaketPrevious30Days = PaketWisata::whereBetween('created_at', [now()->subDays(60), now()->subDays(30)])->count();
-        $percentageChangePaket = $totalPaketPrevious30Days > 0 ? (($totalPaketLast30Days - $totalPaketPrevious30Days) / $totalPaketPrevious30Days) * 100 : 0;
+        $currentPaketCount = PaketWisata::where('created_at', '>=', $lastMonth)->count();
+        $previousPaketCount = PaketWisata::whereBetween('created_at', [$twoMonthsAgo, $lastMonth])->count();
+        $percentageChangePaket = $this->calculatePercentageChange($currentPaketCount, $previousPaketCount);
 
-        $totalPendapatan = Reservasi::sum('total_bayar'); 
-        $pendapatanLast30Days = Reservasi::where('created_at', '>=', now()->subDays(30))->sum('total_bayar');
-        $pendapatanPrevious30Days = Reservasi::whereBetween('created_at', [now()->subDays(60), now()->subDays(30)])->sum('total_bayar');
-    
-        $percentageChangePendapatan = $pendapatanPrevious30Days > 0 
-        ? (($pendapatanLast30Days - $pendapatanPrevious30Days) / $pendapatanPrevious30Days) * 100 
-        : 0;
+        // Pendapatan data
+        $totalPendapatan = Reservasi::sum('total_bayar');
+        $currentPendapatan = Reservasi::where('created_at', '>=', $lastMonth)->sum('total_bayar');
+        $previousPendapatan = Reservasi::whereBetween('created_at', [$twoMonthsAgo, $lastMonth])->sum('total_bayar');
+        $percentageChangePendapatan = $this->calculatePercentageChange($currentPendapatan, $previousPendapatan);
 
-
-        return view('be.dashboard', compact('totalReservasi', 'percentageChange', 'totalUsers', 'percentageChangeUsers', 'totalPaketWisata', 'percentageChangePaket', 'totalPendapatan', 'percentageChangePendapatan', 'statusCounts', 'reservasis' ), [
-            'title' => 'Dashboard'
-        ]);
+        return compact(
+            'totalReservasi',
+            'percentageChange',
+            'totalUsers',
+            'percentageChangeUsers',
+            'totalPaketWisata',
+            'percentageChangePaket',
+            'totalPendapatan',
+            'percentageChangePendapatan',
+            'statusCounts',
+            'reservasis',
+            'title'
+        );
     }
 
-    public function downloadPDF()
+    private function calculatePercentageChange($current, $previous)
     {
-       $totalReservasi = Reservasi::count();
-        $reservasis = Reservasi::with('user', 'pelanggan.user')->latest()->get();
-        $statusCounts = Reservasi::selectRaw('status_reservasi_wisata, COUNT(*) as total')
-            ->groupBy('status_reservasi_wisata')
-            ->pluck('total', 'status_reservasi_wisata')
-            ->toArray();
-
-        $now = now();
-        $lastMonth = $now->copy()->subDays(30);
-        $currentCount = Reservasi::where('created_at', '>=', $lastMonth)->count();
-        $previousCount = Reservasi::where('created_at', '<', $lastMonth)
-                                ->where('created_at', '>=', $lastMonth->copy()->subDays(30))
-                                ->count();
-
-        $percentageChange = $previousCount > 0 ? (($currentCount - $previousCount) / $previousCount) * 100 : 0;
-
-        $totalUsers = User::count(); 
-        $totalUsersLast30Days = User::where('created_at', '>=', now()->subDays(30))->count();
-        $totalUsersPrevious30Days = User::whereBetween('created_at', [now()->subDays(60), now()->subDays(30)])->count();
-        $percentageChangeUsers = $totalUsersPrevious30Days > 0 ? (($totalUsersLast30Days - $totalUsersPrevious30Days) / $totalUsersPrevious30Days) * 100 : 0;
-
-        $totalPaketWisata = PaketWisata::count();
-        $totalPaketLast30Days = PaketWisata::where('created_at', '>=', now()->subDays(30))->count();
-        $totalPaketPrevious30Days = PaketWisata::whereBetween('created_at', [now()->subDays(60), now()->subDays(30)])->count();
-        $percentageChangePaket = $totalPaketPrevious30Days > 0 ? (($totalPaketLast30Days - $totalPaketPrevious30Days) / $totalPaketPrevious30Days) * 100 : 0;
-
-        $totalPendapatan = Reservasi::sum('total_bayar'); 
-        $pendapatanLast30Days = Reservasi::where('created_at', '>=', now()->subDays(30))->sum('total_bayar');
-        $pendapatanPrevious30Days = Reservasi::whereBetween('created_at', [now()->subDays(60), now()->subDays(30)])->sum('total_bayar');
-        $percentageChangePendapatan = $pendapatanPrevious30Days > 0 
-            ? (($pendapatanLast30Days - $pendapatanPrevious30Days) / $pendapatanPrevious30Days) * 100 
-            : 0;
-
-        $pdf = PDF::loadView('be.dashboard_pdf', compact(
-        'totalReservasi', 'percentageChange',
-        'totalUsers', 'percentageChangeUsers',
-        'totalPaketWisata', 'percentageChangePaket',
-        'totalPendapatan', 'percentageChangePendapatan',
-        'statusCounts', 'reservasis'
-        ));
-
-        $pdf->save(storage_path('app/public/laporan_dashboard.pdf'));
-        return response()->download(storage_path('app/public/laporan_dashboard.pdf'));
+        if ($previous > 0) {
+            return (($current - $previous) / $previous) * 100;
+        }
+        return 0;
     }
 
+    public function index()
+    {
+        return view('be.dashboard', $this->getDashboardData('Dashboard'));
+    }
 
     public function bendahara()
     {
-        return view('be.dashboard', [
-            'title' => 'Bendahara'
-        ]);
+        return view('be.dashboard', $this->getDashboardData('Bendahara'));
     }
 
     public function pemilik()
     {
-        return view('be.dashboard', [
-            'title' => 'Pemilik'
-        ]);
+        return view('be.dashboard', $this->getDashboardData('Pemilik'));
     }
 
     public function karyawan()
     {
-        return view('be.dashboard', [
-            'title' => 'Karyawan'
-        ]);
+        return view('be.dashboard', $this->getDashboardData('Karyawan'));
+    }
+
+
+    public function downloadPDF()
+    {
+        $data = $this->getDashboardData('Laporan Dashboard');
+        $data['reservasis'] = Reservasi::with('user', 'pelanggan.user')->latest()->get();
+
+        $pdf = PDF::loadView('be.dashboard_pdf', $data);
+        $pdf->save(storage_path('app/public/laporan_dashboard.pdf'));
+        
+        return response()->download(storage_path('app/public/laporan_dashboard.pdf'));
     }
 
     public function pelanggan()
     {
-        return view('fe.home', [
-            'title' => 'Pelanggan'
-        ]);
+        return view('fe.home', ['title' => 'Pelanggan']);
     }
-
-
-
 
 
 

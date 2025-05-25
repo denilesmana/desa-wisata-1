@@ -43,7 +43,7 @@
                         @endif
                     @endfor
                 </div>
-                  <p class="card-text mt-1"><small class="text-muted">Terakhir diperbarui {{ $item->updated_at->diffForHumans() }}</small></p>
+                  <p class="card-text mt-1"><small class="text-muted">Last Updated {{ $item->updated_at->diffForHumans() }}</small></p>
                 </div>
               </div>
             </div>

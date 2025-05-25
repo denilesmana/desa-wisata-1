@@ -147,8 +147,6 @@ Route::middleware(['auth'])->group(function(){
 });
 
 
-
-
 Route::middleware(['auth'])->group(function() {
     Route::get('/reservasi/create', [App\Http\Controllers\ReservasiController::class, 'create'])->name('reservasi.create');
     Route::post('/reservasi', [App\Http\Controllers\ReservasiController::class, 'store'])->name('reservasi.store');
@@ -157,6 +155,8 @@ Route::middleware(['auth'])->group(function() {
 
 Route::get('/register', [App\Http\Controllers\RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [App\Http\Controllers\RegisterController::class, 'store']);
+
+
 
 
 

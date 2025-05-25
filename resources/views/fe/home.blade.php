@@ -161,7 +161,7 @@
         <div class="row text-center">
           <div class="col-md-12">
             <h2 class="mb-5 text-black">Yuk, Jelajahi Dunia Bersama Kami!</h2>
-            <p class="mb-0"><a href="booking.html" class="btn btn-primary py-3 px-5 text-white">Reservasi Sekarang!~</a></p>
+            <p class="mb-0"><a href="destination" class="btn btn-primary py-3 px-5 text-white">Reservasi Sekarang!</a></p>
           </div>
         </div>
       </div>
