@@ -1,15 +1,16 @@
+  
+@empty($hideFooter)  
   <footer class="site-footer">
     <div class="container">
       <div class="row">
+
         <div class="col-lg-4">
           <div class="mb-3">
             <h3 class="footer-heading mb-2">About Staydesa</h3>
             <p>Desa wisata adalah desa yang menawarkan pengalaman wisata berbasis budaya, alam, dan kehidupan masyarakat lokal.</p>
           </div>
-
-          
-          
         </div>
+
         <div class="col-lg-4 mb-2 mb-lg-0">
           <div class="row mb-2">
             <div class="col-md-12">
@@ -29,30 +30,19 @@
               </ul>
             </div>
           </div>
-
-          
-
         </div>
 
         <div class="col-lg-4 mb-5 mb-lg-0">
-         
-
-          <div class="mb-2">
-            <h3 class="footer-heading mb-2">Subscribe Newsletter</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit minima minus odio.</p>
-
-            <form action="#" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary text-white" type="button" id="button-addon2">Send</button>
-                </div>
-              </div>
-            </form>
-
+          <div class="mb-1">
+            <h3 class="footer-heading mb-1">Contact Us</h3>
+            <p class="mb-1">Butuh informasi lebih lanjut? Hubungi kami melalui email atau telepon berikut:</p>
+            <ul class="list-unstyled mb-1">
+              <li>Email: info@staydesa.com</li>
+              <li>Phone: +62 812 3456 7890</li>
+            </ul>
           </div>
-
         </div>
+
         
       </div>
       <div class="row pt-2 mt-2 text-center">
@@ -72,3 +62,4 @@
       </div>
     </div>
   </footer>
+@endempty

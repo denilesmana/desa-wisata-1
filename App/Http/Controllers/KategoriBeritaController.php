@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KategoriBerita;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KategoriBeritaController extends Controller
 {
@@ -41,8 +42,8 @@ class KategoriBeritaController extends Controller
             'kategori_berita' => $request->kategori_berita,
         ]);
 
-
-        return redirect('/kategori_berita')->with('success', 'Kategori Berita berhasil ditambahkan');
+        Alert::success('Berhasil', 'Kategori Berita berhasil ditambahkan!');
+        return redirect('/kategori_berita');
     }
 
     /**
@@ -76,7 +77,8 @@ class KategoriBeritaController extends Controller
         KategoriBerita::where('id', $kategori_berita->id)
             ->update($validatedData);
 
-        return redirect('/kategori_berita')->with('success', 'Kategori Berita berhasil diubah');
+        Alert::success('Berhasil', 'Kategori Berita berhasil diperbarui!');
+        return redirect('/kategori_berita');
     }
 
     /**
@@ -86,6 +88,7 @@ class KategoriBeritaController extends Controller
     {
         KategoriBerita::destroy($kategori_berita->id);
 
-        return redirect('/kategori_berita')->with('success', 'Kategori Berita berhasil dihapus');
+        Alert::success('Berhasil', 'Kategori Berita berhasil dihapus!');
+        return redirect('/kategori_berita');
     }
 }

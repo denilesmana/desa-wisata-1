@@ -214,6 +214,8 @@
                         <span class="status status-selesai">Selesai</span>
                     @elseif($reservasi->status_reservasi_wisata == 'dibayar')
                         <span class="status status-dibayar">Dibayar</span>
+                    @elseif($reservasi->status_reservasi_wisata == 'dibatalkan')
+                        <span class="status status-dibatalkan">Dibatalkan</span>
                     @else
                         <span class="status status-dipesan">Dipesan</span>
                     @endif

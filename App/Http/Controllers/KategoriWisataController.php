@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KategoriWisata;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KategoriWisataController extends Controller
 {
@@ -43,7 +44,8 @@ class KategoriWisataController extends Controller
             'kategori_wisata' => $request->kategori_wisata,
         ]);
 
-        return redirect('/kategori_wisata')->with('success', 'Kategori Wisata berhasil ditambahkan');
+        Alert::success('Berhasil', 'Kategori Wisata berhasil ditambahkan!');
+        return redirect('/kategori_wisata');
     }
 
     /**
@@ -77,7 +79,8 @@ class KategoriWisataController extends Controller
         KategoriWisata::where('id', $kategori_wisata->id)
             ->update($validatedData);
 
-        return redirect('/kategori_wisata')->with('success', 'Kategori Wisata berhasil diubah');
+        Alert::success('Berhasil', 'Kategori Wisata berhasil diperbarui!');
+        return redirect('/kategori_wisata');
     }
 
     /**
@@ -87,6 +90,7 @@ class KategoriWisataController extends Controller
     {
         KategoriWisata::destroy($kategori_wisata->id);
 
-        return redirect('/kategori_wisata')->with('success', 'Kategori Wisata berhasil dihapus');
+        Alert::success('Berhasil', 'Kategori Wisata berhasil dihapus!');
+        return redirect('/kategori_wisata');
     }
 }

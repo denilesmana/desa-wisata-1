@@ -19,39 +19,51 @@
                 @guest
                   <a href="{{ route('login') }}" class="btn btn-primary text-white px-5 py-2">Login</a>
                 @endguest
-
-              
+                
               @auth
-                <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
-                      id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        @php
-                            $user = Auth::user();
-                            $foto = optional($user->pelanggan)->foto;
-                        @endphp
-                        
-                        <img src="{{ $foto ? asset('storage/' . $foto) : asset('frontend/images/default-profile.jpg') }}"
-                          alt="Profile"
-                          class="rounded-circle shadow-sm"
-                          width="50" height="50"
-                          style="object-fit: cover; aspect-ratio: 1 / 1;">
+              <div class="dropdown">
+                  <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                    id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      @php
+                          $user = Auth::user();
+                          $pelanggan = optional($user->pelanggan);
+                          $foto = $pelanggan->foto;
+                          $fotoUrl = !empty($foto) ? asset('storage/' . $foto) : asset('frontend/images/default-profile.jpg');
+                      @endphp
 
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
-                        <a class="dropdown-item d-flex align-items-center gap-3" href="{{ route('profile.index') }}">
-                            <i class="ti-user text-primary"></i>
-                            <span>Profil Saya</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item d-flex align-items-center gap-3">
-                                <i class="ti-power-off text-danger"></i>
-                                <span>Logout</span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
+                      <img src="{{ $fotoUrl }}"
+                          alt="Profile"
+                          class="rounded-circle shadow-sm me-2"
+                          width="40" height="40"
+                          style="object-fit: cover; aspect-ratio: 1 / 1;">
+                  </a>
+
+                  <ul class="dropdown-menu dropdown-menu-end shadow-sm rounded-3 mt-2" aria-labelledby="userDropdown">
+                      <li>
+                          <a class="dropdown-item py-2" href="{{ route('profile.index') }}">
+                              Profil Saya
+                          </a>
+                      </li>
+                      <li>
+                          <a class="dropdown-item py-2" href="{{ route('riwayat.index') }}">
+                              Riwayat Pemesanan
+                          </a>
+                      </li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li>
+                          <form action="{{ route('logout') }}" method="POST" class="px-1">
+                              @csrf
+                              <button type="submit" class="btn btn-link dropdown-item py-1 text-danger">
+                                  Logout
+                              </button>
+                          </form>
+                      </li>
+                  </ul>
+              </div>
               @endauth
+              </div>
+            </div>
+
+
           </div>
       </header>

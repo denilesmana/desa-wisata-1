@@ -9,7 +9,7 @@
           <span class="ti-view-list"></span>
         </button>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown mr-1">
+          {{-- <li class="nav-item dropdown mr-1">
             <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
               <i class="ti-email mx-0"></i>
             </a>
@@ -52,7 +52,7 @@
                 </div>
               </a>
             </div>
-          </li>
+          </li> --}}
          <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
               <i class="ti-bell mx-0"></i>
@@ -109,12 +109,12 @@
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" data-toggle="dropdown">
-                <img src="{{ asset('/backend/images/faces/face28.jpg') }}" alt="profile">
+                <img src="{{ asset('/backend/images/faces/default-profile.jpg') }}" alt="profile">
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="#">
+                {{-- <a class="dropdown-item" href="#">
                   <i class="ti-settings text-primary"></i> Settings
-                </a>
+                </a> --}}
                 <form action="{{ route('logout') }}" method="POST">
                   @csrf
                   <button type="submit" class="dropdown-item">

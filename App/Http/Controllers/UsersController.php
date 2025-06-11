@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Users;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class UsersController extends Controller
@@ -46,7 +47,8 @@ class UsersController extends Controller
 
     User::create($validated);
     
-    return redirect('users')->with('success', 'User berhasil dibuat!');
+    Alert::success('Berhasil', 'User berhasil ditambahkan!');
+    return redirect('users');
     }
 
     /**
@@ -80,11 +82,14 @@ class UsersController extends Controller
     ]);
 
     $user->update($validated);
-    return redirect()->route('users.index')->with('success', 'Data user diperbarui!');
+    Alert::success('Berhasil', 'User berhasil diperbarui!');
+    return redirect()->route('users.index');
     }
 
     public function destroy(User $user) {
     $user->delete();
-    return redirect()->route('users.index')->with('success', 'User deleted successfully');
+
+    Alert::success('Berhasil', 'User berhasil dihapus!');
+    return redirect()->route('users.index');
     }
 }

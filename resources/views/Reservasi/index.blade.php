@@ -52,11 +52,13 @@
                                 'pesan' => 'bg-warning text-dark',
                                 'dibayar' => 'bg-info text-white',
                                 'selesai' => 'bg-success text-white',
+                                'dibatalkan' => 'bg-danger text-white'
                             ];
-                            $statusOptions = ['pesan', 'dibayar', 'selesai'];
+                            $statusOptions = ['pesan', 'dibayar', 'selesai', 'dibatalkan']; 
                             $currentStatus = $item->status_reservasi_wisata;
                             $badgeClass = $statusColors[$currentStatus] ?? 'bg-secondary text-white';
                         @endphp
+
 
                         <td>
                             <select class="form-select status-select {{ $badgeClass }}" data-id="{{ $item->id }}">

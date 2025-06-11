@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Karyawan;
 use App\Models\User;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class KaryawanController extends Controller
@@ -104,8 +105,8 @@ class KaryawanController extends Controller
             ]
         );
 
-        return redirect()->route('karyawan.index')
-               ->with('success', 'Data karyawan berhasil diupdate.');
+        Alert::success('Berhasil', 'User Karyawan berhasil diperbarui!');
+        return redirect()->route('karyawan.index');
     }
 
 
@@ -117,6 +118,7 @@ class KaryawanController extends Controller
         $karyawan = Karyawan::findOrFail($id);
         $karyawan->delete();
 
-        return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil dihapus.');
+        Alert::success('Berhasil', 'User Karyawan berhasil dihapus!');
+        return redirect()->route('karyawan.index');
     }
 }

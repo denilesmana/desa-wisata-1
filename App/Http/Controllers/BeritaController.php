@@ -6,6 +6,7 @@ use App\Models\Berita;
 use App\Models\KategoriBerita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BeritaController extends Controller
 {
@@ -53,7 +54,8 @@ class BeritaController extends Controller
 
         Berita::create($validatedData);
 
-        return redirect('/berita')->with('success', 'Berita berhasil ditambahkan!');
+        Alert::success('Berhasil', 'Berita berhasil ditambahkan!');
+        return redirect('/berita');
     }
     
 
@@ -83,29 +85,30 @@ class BeritaController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-{
-    $validatedData = $request->validate([
-        'judul' => 'required|max:255',
-        'berita' => 'required',
-        'tgl_post' => 'required|date',
-        'id_kategori_berita' => 'required|exists:kategori_berita,id',
-        'foto' => 'image|file|max:2048'
-    ]);
+    {
+        $validatedData = $request->validate([
+            'judul' => 'required|max:255',
+            'berita' => 'required',
+            'tgl_post' => 'required|date',
+            'id_kategori_berita' => 'required|exists:kategori_berita,id',
+            'foto' => 'image|file|max:2048'
+        ]);
 
-    $berita = Berita::findOrFail($id);
+        $berita = Berita::findOrFail($id);
 
-    if ($request->file('foto')) {
-        if ($berita->foto && Storage::disk('public')->exists($berita->foto)) {
-            Storage::disk('public')->delete($berita->foto);
+        if ($request->file('foto')) {
+            if ($berita->foto && Storage::disk('public')->exists($berita->foto)) {
+                Storage::disk('public')->delete($berita->foto);
+            }
+
+            $validatedData['foto'] = $request->file('foto')->store('berita-images', 'public');
         }
 
-        $validatedData['foto'] = $request->file('foto')->store('berita-images', 'public');
+        $berita->update($validatedData);
+        
+        Alert::success('Berhasil', 'Berita berhasil diperbarui!');
+        return redirect('/berita');
     }
-
-    $berita->update($validatedData);
-
-    return redirect('/berita')->with('success', 'Berita berhasil diubah!');
-}
 
 
     
@@ -123,7 +126,8 @@ class BeritaController extends Controller
 
     $berita->delete();
 
-    return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus!');
+    Alert::success('Berhasil', 'Berita berhasil dihapus!');
+    return redirect()->route('berita.index');
     }
 }
 

@@ -1,8 +1,11 @@
 @extends('layouts.master-fe')
     
-    @section('content')
+@php
+    $hideFooter = true;
+@endphp
 
-    <div class="container py-5">
+@section('content')
+<div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm">
@@ -10,10 +13,16 @@
                     <h4 class="mb-0">Profil Saya</h4>
                 </div>
                 <div class="card-body">
-
                     @if ($pelanggan)
+                        @php
+                            $user = Auth::user();
+                            $pelanggan = optional($user->pelanggan);
+                            $foto = $pelanggan->foto;
+                            $fotoUrl = !empty($foto) ? asset('storage/' . $foto) : asset('frontend/images/default-profile.jpg');
+                        @endphp
+
                         <div class="text-center mb-4">
-                            <img src="{{ $pelanggan->foto ? asset('storage/'.$pelanggan->foto) : asset('frontend/images/default-profile.png') }}" 
+                            <img src="{{ $fotoUrl }}" 
                                 class="rounded-circle shadow" 
                                 width="150" height="150"
                                 style="object-fit: cover;">
@@ -61,16 +70,14 @@
                                 </a>
                             </div>
                         </div>
-
-
                     @else
                         <div class="alert alert-warning text-center">
                             Data profil belum tersedia.
                         </div>
                     @endif
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection

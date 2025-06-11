@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DiskonPaket;
 use Carbon\Carbon;
 use App\Models\PaketWisata;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DiskonController extends Controller
 {
@@ -102,7 +103,9 @@ class DiskonController extends Controller
                 ]
             );
         }
-        return back()->with('success', 'Diskon berhasil diperbarui!');
+
+        Alert::success('Berhasil', 'Diskon berhasil diperbarui!');
+        return back();
     }
 
     /**

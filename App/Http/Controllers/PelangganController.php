@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pelanggan;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PelangganController extends Controller
 {
@@ -146,7 +147,8 @@ class PelangganController extends Controller
             Pelanggan::create($pelangganData);
         }
 
-        return redirect()->route('pelanggan.index')->with('success', 'Data pelanggan berhasil diupdate.');
+        Alert::success('Berhasil', 'User Pelanggan berhasil diperbarui!');
+        return redirect()->route('pelanggan.index');
     }
     
 
@@ -158,7 +160,7 @@ class PelangganController extends Controller
         $pelanggan = Pelanggan::findOrFail($id);
         $pelanggan->delete();
 
-        return redirect()->route('pelanggan.index')
-               ->with('success', 'Data pelanggan berhasil dihapus.');
+        Alert::success('Berhasil', 'User Pelanggan berhasil dihapus!');
+        return redirect()->route('pelanggan.index');
     }
 }

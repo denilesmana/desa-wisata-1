@@ -26,9 +26,14 @@ Route::prefix('profile')->group(function() {
     Route::put('/update', [App\Http\Controllers\ProfilController::class, 'update'])->name('profile.update');
 });
 
+//Riwayat
+Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])->name('riwayat.index');
+
 //Reservasi
 Route::post('/reservasi', [App\Http\Controllers\ReservasiController::class, 'store'])->name('reservasi.store');
 Route::post('/reservasi/{id}/update-status', [App\Http\Controllers\ReservasiController::class, 'updateStatus'])->name('reservasi.update-status');
+Route::put('/reservasi/{id}/batal', [App\Http\Controllers\ReservasiController::class, 'batal'])->name('reservasi.batal')->middleware('auth');
+
 
 //Berita
 Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Penginapan;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PenginapanController extends Controller
 {
@@ -64,7 +65,8 @@ class PenginapanController extends Controller
   
         Penginapan::create($validatedData);
 
-        return redirect('/penginapan')->with('success', 'Penginapan berhasil ditambahkan!');
+        Alert::success('Berhasil', 'Penginapan berhasil ditambahkan!');
+        return redirect('/penginapan');
     }
 
 
@@ -125,7 +127,8 @@ class PenginapanController extends Controller
 
         $penginapan->update($validatedData);
 
-        return redirect()->route('penginapan.index')->with('success', 'Data penginapan berhasil diupdate!');
+        Alert::success('Berhasil', 'Penginapan berhasil diperbarui!');
+        return redirect()->route('penginapan.index');
     }
 
 
@@ -146,7 +149,8 @@ class PenginapanController extends Controller
 
         $penginapan->delete();
 
-        return redirect()->route('penginapan.index')->with('success', 'Data penginapan berhasil dihapus!');
+        Alert::success('Berhasil', 'Penginapan berhasil dihapus!');
+        return redirect()->route('penginapan.index');
     }
 
 }

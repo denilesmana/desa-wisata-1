@@ -97,7 +97,8 @@
       </div>
     </div>
     @endsection
-    @include('sweetalert::alert')
+
+    {{-- @include('sweetalert::alert') --}}
 </body>
 </html>
 

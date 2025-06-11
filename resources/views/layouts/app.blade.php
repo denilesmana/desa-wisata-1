@@ -22,12 +22,17 @@
                     @yield('content')
                 </div>
 
+                @include('sweetalert::alert')
+
+                {{-- Footer --}}
+
                 @include('layouts.be-footer')
             </div>
         </div>
     </div>
 
     {{-- Scripts --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('backend/vendors/base/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('backend/vendors/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('backend/vendors/js/vendor.bundle.base.js') }}"></script>

@@ -11,7 +11,7 @@
             <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
               <h1 class="text-white font-weight-bold">Pesona Desa Wisata</h1>
               <p class="mb-5">Nikmati pengalaman wisata yang otentik, mulai dari kearifan lokal hingga pemandangan yang memukau.</p>
-              <<p><a href="#paket-wisata" class="btn btn-primary py-3 px-5 text-white">Reservasi Sekarang!</a></p>
+              <<p><a href="destination" class="btn btn-primary py-3 px-5 text-white">Reservasi Sekarang!</a></p>
             </div>
             
           </div>
@@ -25,7 +25,7 @@
             <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
               <h1 class="text-white font-weight-bold">Pesona Desa Wisata</h1>
               <p class="mb-5">Rasakan ketenangan alam, kehangatan budaya lokal, dan pengalaman tak terlupakan di setiap sudut desa wisata kami.</p>
-              <a href="{{ url('/#paket-wisata') }}" class="btn btn-primary py-3 px-5 text-white">Reservasi Sekarang!</a>
+              <a href="destination" class="btn btn-primary py-3 px-5 text-white">Reservasi Sekarang!</a>
             </div>
           </div>
         </div>

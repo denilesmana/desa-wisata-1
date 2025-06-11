@@ -59,10 +59,13 @@ class PaketWisataController extends Controller
             }
 
             PaketWisata::create($validatedData);
-            
-            return redirect()->route('paket_wisata.index')->with('success', 'Paket Wisata berhasil ditambahkan.');
+
+            Alert::success('Berhasil', 'Paket Wisata berhasil ditambahkan!');
+            return redirect()->route('paket_wisata.index');
+
         } catch (\Exception $e) {
-            return back()->withInput()->with('error', 'Gagal menyimpan data: '.$e->getMessage());
+            Alert::error('Gagal', 'Paket Wisata gagal ditambahkan!');
+            return back()->withInput();
         }
     }
 
@@ -129,7 +132,9 @@ class PaketWisataController extends Controller
         }
 
         $paket_wisata->update($validatedData);
-        return redirect()->route('paket_wisata.index')->with('success', 'Paket Wisata updated successfully.');
+
+        Alert::success('Berhasil', 'Paket Wisata berhasil diperbarui!');
+        return redirect()->route('paket_wisata.index');
     }
 
     /**
@@ -149,7 +154,8 @@ class PaketWisataController extends Controller
 
         $paket_wisata->delete();
 
-        return redirect()->route('paket_wisata.index')->with('success', 'Paket wisata berhasil dihapus.');
+        Alert::success('Berhasil', 'Paket Wisata berhasil dihapus!');
+        return redirect()->route('paket_wisata.index');
     }
 
 }

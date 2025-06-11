@@ -23,7 +23,7 @@ return new class extends Migration
             $table->float('nilai_diskon');
             $table->bigInteger('total_bayar');
             $table->text('file_bukti_tf');
-            $table->enum('status_reservasi_wisata', ['pesan', 'dibayar', 'selesai']);
+            $table->enum('status_reservasi_wisata', ['pesan', 'dibayar', 'selesai', 'dibatalkan']);
             $table->timestamps();
         });
     }

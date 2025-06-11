@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\KategoriWisata;
 use App\Models\ObyekWisata;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ObyekWisataController extends Controller
 {
@@ -68,7 +69,8 @@ class ObyekWisataController extends Controller
 
         ObyekWisata::create($validatedData);
 
-        return redirect('/obyek_wisata')->with('success', 'Obyek Wisata berhasil ditambahkan!');
+        Alert::success('Berhasil', 'Obyek Wisata berhasil ditambahkan!');
+        return redirect('/obyek_wisata');
     }
 
     /**
@@ -97,37 +99,38 @@ class ObyekWisataController extends Controller
      */
     public function update(Request $request, $id)
     {
-    $obyekWisata = ObyekWisata::findOrFail($id);
-    
-    $validatedData = $request->validate([
-        'nama_wisata' => 'required|max:255',
-        'deskripsi_wisata' => 'required',
-        'id_kategori_wisata' => 'required|exists:kategori_wisata,id',
-        'fasilitas' => 'required|max:255',
-        'foto1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'foto2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'foto3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'foto4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'foto5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-    ]);
+        $obyekWisata = ObyekWisata::findOrFail($id);
+        
+        $validatedData = $request->validate([
+            'nama_wisata' => 'required|max:255',
+            'deskripsi_wisata' => 'required',
+            'id_kategori_wisata' => 'required|exists:kategori_wisata,id',
+            'fasilitas' => 'required|max:255',
+            'foto1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
 
-    $photoFields = ['foto1', 'foto2', 'foto3', 'foto4', 'foto5'];
-    
-    foreach ($photoFields as $field) {
-        if ($request->hasFile($field)) {
-            if ($obyekWisata->$field) {
-                Storage::delete($obyekWisata->$field);
+        $photoFields = ['foto1', 'foto2', 'foto3', 'foto4', 'foto5'];
+        
+        foreach ($photoFields as $field) {
+            if ($request->hasFile($field)) {
+                if ($obyekWisata->$field) {
+                    Storage::delete($obyekWisata->$field);
+                }
+                
+                $validatedData[$field] = $request->file($field)->store('obyek-wisata-images', 'public');
+            } else {
+                $validatedData[$field] = $obyekWisata->$field;
             }
-            
-            $validatedData[$field] = $request->file($field)->store('obyek-wisata-images', 'public');
-        } else {
-            $validatedData[$field] = $obyekWisata->$field;
         }
-    }
 
-    $obyekWisata->update($validatedData);
+        $obyekWisata->update($validatedData);
 
-    return redirect('/obyek_wisata')->with('success', 'Obyek Wisata berhasil diubah!');
+        Alert::success('Berhasil', 'Obyek Wisata berhasil diperbaru!');
+        return redirect('/obyek_wisata');
     }
 
     /**
@@ -154,6 +157,7 @@ class ObyekWisataController extends Controller
 
         $obyek_wisata->delete();
 
-        return redirect('/obyek_wisata')->with('success', 'Obyek Wisata berhasil dihapus!');
+        Alert::success('Berhasil', 'Obyek Wisata berhasil dihapus!');
+        return redirect('/obyek_wisata');
     }
 }

@@ -210,10 +210,53 @@ class ReservasiController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
+        if ($reservasi->status_reservasi_wisata === 'dibatalkan') {
+        abort(403, 'Struk tidak tersedia untuk reservasi yang dibatalkan.');
+        }
+
         $pdf = PDF::loadView('reservasi.struk', compact('reservasi'));
         return $pdf->download('struk-reservasi-' . $reservasi->id . '.pdf');
     }
 
+    public function batal($id)
+    {
+        // Pastikan user sudah login
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu');
+        }
+
+        $user = Auth::user();
+        
+        // Dapatkan data pelanggan
+        $pelanggan = Pelanggan::where('id_users', $user->id)->first();
+        
+        if (!$pelanggan) {
+            return redirect()->back()->with('error', 'Data pelanggan tidak ditemukan');
+        }
+
+        // Cari reservasi milik pelanggan ini
+        $reservasi = Reservasi::where('id', $id)
+                    ->where('id_pelanggan', $pelanggan->id)
+                    ->first();
+
+        if (!$reservasi) {
+            return redirect()->back()->with('error', 'Reservasi tidak ditemukan');
+        }
+
+        // Validasi status reservasi
+        if ($reservasi->status_reservasi_wisata != 'pesan') {
+            $status = $reservasi->status_reservasi_wisata == 'dibayar' ? 'sudah dibayar' : 'selesai';
+            return redirect()->back()->with('error', 'Reservasi tidak dapat dibatalkan karena sudah '.$status);
+        }
+
+        // Update status reservasi
+        $reservasi->update([
+            'status_reservasi_wisata' => 'dibatalkan'
+        ]);
+
+
+        return redirect()->back()->with('success', 'Reservasi berhasil dibatalkan');
+    }
     
     public function edit(string $id)
     {
